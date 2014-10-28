@@ -25,6 +25,23 @@ class User < ActiveRecord::Base
     primary_key: :id,
     inverse_of: :author
 
+  has_many :likes, inverse_of: :user
+
+  has_many :friend_requests_to_be_accepted,
+    class_name: "FriendRequest",
+    foreign_key: :requestor_id,
+    primary_key: :id,
+    inverse_of: :requestor
+
+  has_many :friend_requests_to_accept,
+    class_name: "FriendRequest",
+    foreign_key: :requested_id,
+    primary_key: :id,
+    inverse_of: :requested
+
+  has_many :follows, inverse_of: :user
+
+
   def self.find_by_credentials(user_params)
     @user = User.find_by_email(user_params[:email])
     @user && @user.is_password?(user_params[:password]) ? @user : nil
@@ -43,6 +60,58 @@ class User < ActiveRecord::Base
     self.session_token = SecureRandom.urlsafe_base64(12)
     self.save
     return self.session_token
+  end
+
+  def full_name
+    self.first_name + " " + self.last_name
+  end
+
+  def recent_posts_and_comments
+    result = []
+    self.wall_posts.each do |post|
+      result.push({post => post.comments.to_a})
+    end
+
+    result.sort! { |post1, post2|
+
+    }
+
+    result
+  end
+
+  def post_sort
+    self.wall_posts.sort { |post1, post2|
+      post2.created_at <=> post1.created_at
+    }
+  end
+
+  def friends
+    friends = [];
+    Friend.where(friend_id: self.id).each do |friendship|
+      friends.push(friendship.friended_id)
+    end
+
+    Friend.where(friended_id: self.id).each do |friendship|
+      friends.push(friendship.friend_id) unless friends.include?(friendship.friend_id)
+    end
+
+    friends
+  end
+
+  def friends_with?(user)
+    self.friends.each do |friend_id|
+      return true if friend_id == user.id
+    end
+
+    false
+  end
+
+  def requested_friendship?(user)
+    self.friend_requests_to_be_accepted.each do |request|
+      return true if request.requested_id == user.id
+    end
+
+    false
   end
 
 

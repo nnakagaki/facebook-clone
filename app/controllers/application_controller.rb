@@ -7,7 +7,10 @@ class ApplicationController < ActionController::Base
     @u ||= User.find_by_session_token(session[:session_token])
   end
 
+  def current_user_likes
+    @l ||= Like.where(user_id: current_user.id)
+  end
 
-  helper_method :current_user
 
+  helper_method :current_user, :current_user_likes
 end

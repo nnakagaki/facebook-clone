@@ -13,5 +13,9 @@ class Post < ActiveRecord::Base
 		primary_key: :id,
 		inverse_of: :wall_posts
 
-	has_many :comments, inverse_of: :post
+	has_many :comments, dependent: :destroy, inverse_of: :post
+
+  has_many :likes, as: :likable, dependent: :destroy
+
+  has_many :follows, dependent: :destroy, inverse_of: :post
 end

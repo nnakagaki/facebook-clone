@@ -7,5 +7,7 @@ class Comment < ActiveRecord::Base
 		primary_key: :id,
 		inverse_of: :comments
 
-	belongs_to :post, inverse_of: :comments
+	belongs_to :post, dependent: :destroy, inverse_of: :comments
+
+  has_many :likes, as: :likable, dependent: :destroy
 end

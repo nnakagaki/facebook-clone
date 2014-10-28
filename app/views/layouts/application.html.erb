@@ -2,11 +2,21 @@
 <html>
 <head>
   <title>FacebookClone</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+  <nav>
+    <% if current_user %>
+      <a href="<%= session_url %>" data-method="delete">Log Out</a>
+      <a href="<%= user_url(current_user) %>"><%= current_user.first_name %></a>
+    <% else %>
+      <a href="<%= new_user_url %>">Sign Up</a>
+      <a href="<%= new_session_url %>">Log In</a>
+    <% end %>
+  </nav>
 
   <% if flash[:errors] %>
     <%= flash[:errors] %>
@@ -14,10 +24,14 @@
   <% end %>
 
   <% if current_user %>
-    <a href="<%= session_url %>" data-method="delete">Log Out</a>
-  <% else %>
-    <a href="<%= new_user_url %>">Sign Up</a>
-    <a href="<%= new_session_url %>">Log In</a>
+    <br>
+      <div id="friend-requests">
+        <% current_user.friend_requests_to_accept.each do |request| %>
+          <%= request.requestor.full_name %>
+          <a href="<%= friend_index_url(requestor_id: request.requestor.id, request_id: request.id) %>" data-method="post">Accept</a>
+        <% end %>
+      </div>
+    <br>
   <% end %>
 
   <%= yield %>

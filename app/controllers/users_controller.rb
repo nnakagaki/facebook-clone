@@ -22,6 +22,8 @@ class UsersController < ApplicationController
 
   private
   def user_params
+    params[:user][:first_name].capitalize!
+    params[:user][:last_name].capitalize!
     params.require(:user).permit(:email, :password, :first_name, :last_name)
   end
 end
