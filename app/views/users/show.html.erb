@@ -18,19 +18,20 @@
 <ul>
   <% @user.wall_posts.each do |post| %>
     <% if post.author == @user %>
-      <% name_string = @user.first_name + " " + @user.last_name %>
+      <% name_string = "<a href="+user_url(post.author)+">"+@user.first_name + " " + @user.last_name+"</a>" %>
     <% else %>
-      <% name_string = post.author.first_name+" "+post.author.last_name+" > "+@user.first_name+" "+@user.last_name %>
+      <% name_string = "<a href="+user_url(post.author)+">"+post.author.first_name+" "+post.author.last_name+"</a> > <a href="+user_url(@user)+">"+@user.first_name+" "+@user.last_name+"</a>" %>
     <% end %>
     <li>
-      <%= name_string + ": " + post.description %>
+      <%= name_string.html_safe + ": " + post.description %>
       <br>
       <%= post.updated_at.to_s %>
       <br>
       <ul>
         <% post.comments.each do |comment| %>
           <li>
-            <%= comment.author.first_name+" "+comment.author.last_name+": "+comment.description %>
+            <a href="<%= user_url(comment.author) %>"><%= comment.author.first_name+" "+comment.author.last_name %></a>
+              <%= ": "+comment.description %>
             <br>
             <%= comment.updated_at.to_s %>
           </li>
