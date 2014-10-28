@@ -1,8 +1,10 @@
 <h1><%= @user.first_name + " " + @user.last_name %></h1>
-<form action="<%= statuses_url %>" method="post">
+<form action="<%= posts_url %>" method="post">
   <input type="hidden"
          name="authenticity_token"
          value="<%= form_authenticity_token %>">
+
+  <input type="hidden" name="post[userwall_id]" value="<%= @user.id %>">
 
   <% if @user.id == current_user.id %>
     <textarea name="post[description]" id="description" placeholder="What's on your mind?"></textarea>
@@ -11,14 +13,41 @@
     <textarea name="post[description]" id="description" placeholder="Write something..."></textarea>
     <input type="submit" value="Post">
   <% end %>
-
-  <ul>
-    <% @user.posts.each do |post| %>
-      <li>
-        <%= @user.first_name + " " @user.last_name + ": " + post.description %>
-        <br>
-        <%= post.updated_at.to_s %>
-      </li>
-    <% end %>
-  </ul>
 </form>
+
+<ul>
+  <% @user.wall_posts.each do |post| %>
+    <% if post.author == @user %>
+      <% name_string = @user.first_name + " " + @user.last_name %>
+    <% else %>
+      <% name_string = post.author.first_name+" "+post.author.last_name+" > "+@user.first_name+" "+@user.last_name %>
+    <% end %>
+    <li>
+      <%= name_string + ": " + post.description %>
+      <br>
+      <%= post.updated_at.to_s %>
+      <br>
+      <ul>
+        <% post.comments.each do |comment| %>
+          <li>
+            <%= comment.author.first_name+" "+comment.author.last_name+": "+comment.description %>
+            <br>
+            <%= comment.updated_at.to_s %>
+          </li>
+        <% end %>
+
+        <li>
+          <form action="<%= comments_url %>" method="post">
+            <input type="hidden"
+               name="authenticity_token"
+               value="<%= form_authenticity_token %>">
+            <input type="hidden" name="current_user_page_id" value="<%= @user.id %>">
+            <input type="hidden" name="comment[post_id]" value="<%= post.id %>">
+            <input type="text" name="comment[description]" placeholder="Write a comment...">
+            <input type="submit" value="Post">
+          </form>
+        </li>
+      </ul>
+    </li>
+  <% end %>
+</ul>

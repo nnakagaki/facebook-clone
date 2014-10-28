@@ -7,7 +7,23 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
-  has_many :statuses
+  has_many :authored_posts,
+    class_name: "Post",
+    foreign_key: :author_id,
+    primary_key: :id,
+    inverse_of: :author
+
+  has_many :wall_posts,
+    class_name: "Post",
+    foreign_key: :userwall_id,
+    primary_key: :id,
+    inverse_of: :wall_user
+
+  has_many :comments,
+    class_name: "Comment",
+    foreign_key: :author_id,
+    primary_key: :id,
+    inverse_of: :author
 
   def self.find_by_credentials(user_params)
     @user = User.find_by_email(user_params[:email])
