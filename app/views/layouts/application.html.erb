@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FacebookClone</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <% if flash[:errors] %>
+    <%= flash[:errors] %>
+    <br><br>
+  <% end %>
+
+  <% if current_user %>
+    <a href="<%= session_url %>" data-method="delete">Log Out</a>
+  <% else %>
+    <a href="<%= new_user_url %>">Sign Up</a>
+    <a href="<%= new_session_url %>">Log In</a>
+  <% end %>
+
+  <%= yield %>
+
+</body>
+</html>
