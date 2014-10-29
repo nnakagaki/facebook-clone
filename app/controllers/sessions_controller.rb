@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       session[:session_token] = @user.reset_session_token
       redirect_to user_url(@user.id)
     else
-      flash.now[:errors] = "wrong email/password combination"
+      flash.now[:errors] = ["wrong email/password combination"]
       render :new
     end
   end
