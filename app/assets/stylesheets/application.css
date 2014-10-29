@@ -14,7 +14,7 @@
  *= require_self
  */
 
-body, div, h1, h2, ul, li {
+body, nav, div, h1, h2, ul, li {
   margin: 0;
   padding: 0;
   border: 0;
@@ -35,7 +35,35 @@ body {
 nav {
   background: rgb(45,255,143);
   margin-bottom: 10px;
-  padding: 10px;
+  height: 45px;
+}
+
+nav div.logo {
+	width: 22px;
+	height: 22px;
+	margin: 12px 12px 12px 60px;
+	padding: 0;
+	background: blue;
+	float: left;
+}
+
+nav div.right-nav {
+	float: left;
+	margin-left: 250px;
+	margin-top: 12px;
+}
+
+nav div.search-bar {
+	float: left;
+	margin: 12px 12px 12px 0;
+}
+
+nav div.search-bar input {
+	padding-left: 4px;
+	height: 21px;
+	width: 350px;
+	border-radius: 5px;
+	border: 0;
 }
 
 div#errors {

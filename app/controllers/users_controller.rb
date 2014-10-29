@@ -1,14 +1,29 @@
 class UsersController < ApplicationController
+  def static
+    render :static
+  end
+
+  def index
+    if current_user
+      render json: {current_user: current_user, friends: current_user.friends}
+    else
+      render json: {}
+    end
+  end
 
   def new
-    render :new
+    if current_user
+      redirect_to "#" + user_path(current_user)
+    else
+      render :new
+    end
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
       session[:session_token] = @user.reset_session_token
-      redirect_to user_url(@user.id)
+      redirect_to "#" + user_path(@user.id)
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new
@@ -17,7 +32,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render :show
+    respond_to do |format|
+      format.html {render :show}
+      format.json {render json: @user}
+    end
   end
 
   private
