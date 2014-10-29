@@ -38,6 +38,12 @@ nav {
   padding: 10px;
 }
 
+div#errors {
+  width: 830px;
+  margin-left: 60px;
+  color: red;
+}
+
 div#user-show {
   width: 850px;
   margin-left: 50px;
@@ -51,8 +57,43 @@ div#user-show h1 {
   border-radius: 4px;
 }
 
+div#user-show div#left-side {
+  width: 320px;
+  float: left;
+}
+
+div#user-show div#left-side h2 {
+  background: rgb(246,247,248);
+  padding: 10px;
+  border-radius: 4px 4px 0 0;
+}
+
+div#user-show div#left-side ul {
+  width: 300px;
+  padding: 10px 0 10px 10px;
+}
+
+div#user-show div#left-side ul li {
+  border-top: 1px solid grey;
+  padding: 4px;
+}
+
+div#user-show div#left-side ul li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+div#user-show div#left-side ul li:last-child {
+  padding-bottom: 0;
+}
+
+div#user-show div#right-side {
+  width: 470px;
+  float: right;
+}
+
 div#user-show li.post {
-  width: 450px;
+  width: 470px;
   float: right;
   padding: 10px;
   border: 1px solid lightgrey;
@@ -68,7 +109,7 @@ div#user-show li.post li.comment {
 }
 
 div#user-show form#new-post {
-  width: 450px;
+  width: 470px;
   float: right;
   padding: 10px;
   border: 1px solid lightgrey;
@@ -77,10 +118,9 @@ div#user-show form#new-post {
   border-radius: 4px;
 }
 
-div#user-show div.friends {
+div#user-show div.info {
   width: 320px;
   float: left;
-  padding: 10px;
   border: 1px solid lightgrey;
   margin: 7px;
   background: white;
@@ -94,4 +134,12 @@ div#user-show div.add-friend {
   margin: 7px;
   background: white;
   border-radius: 4px;
+}
+
+div#user-show form#new-post textarea {
+  width: 464px;
+}
+
+div#user-show form#new-comment input#comment {
+  width: 464px;
 }

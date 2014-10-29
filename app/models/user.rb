@@ -41,6 +41,14 @@ class User < ActiveRecord::Base
 
   has_many :follows, inverse_of: :user
 
+  has_many :notifications, inverse_of: :user
+
+  has_many :notified,
+    class_name: "Notification",
+    foreign_key: :author_id,
+    primary_key: :id,
+    inverse_of: :author
+
 
   def self.find_by_credentials(user_params)
     @user = User.find_by_email(user_params[:email])

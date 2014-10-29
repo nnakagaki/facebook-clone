@@ -12,6 +12,7 @@
     <% if current_user %>
       <a href="<%= session_url %>" data-method="delete">Log Out</a>
       <a href="<%= user_url(current_user) %>"><%= current_user.first_name %></a>
+      <%= current_user.notifications.count %>
     <% else %>
       <a href="<%= new_user_url %>">Sign Up</a>
       <a href="<%= new_session_url %>">Log In</a>
@@ -19,19 +20,22 @@
   </nav>
 
   <% if flash[:errors] %>
-    <%= flash[:errors] %>
-    <br><br>
+    <div id="errors">
+      <ul>
+        <% flash[:errors].each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
   <% if current_user %>
-    <br>
       <div id="friend-requests">
         <% current_user.friend_requests_to_accept.each do |request| %>
           <%= request.requestor.full_name %>
           <a href="<%= friend_index_url(requestor_id: request.requestor.id, request_id: request.id) %>" data-method="post">Accept</a>
         <% end %>
       </div>
-    <br>
   <% end %>
 
   <%= yield %>

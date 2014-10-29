@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
     @l ||= Like.where(user_id: current_user.id)
   end
 
+  def current_user_check
+    unless current_user
+      redirect_to new_user_url
+    end
+  end
 
   helper_method :current_user, :current_user_likes
 end

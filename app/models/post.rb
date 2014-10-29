@@ -18,4 +18,10 @@ class Post < ActiveRecord::Base
   has_many :likes, as: :likable, dependent: :destroy
 
   has_many :follows, dependent: :destroy, inverse_of: :post
+
+  has_many :followers, through: :follows, source: :user
+
+  has_many :notifications, dependent: :destroy, inverse_of: :post
+
+  has_many :notices, class_name: "Notification", as: :notifyable, dependent: :destroy
 end
