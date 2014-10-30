@@ -1,3 +1,14 @@
 FacebookClone.Views.ShowNotifications = Backbone.View.extend({
-	template: JST["show_notifications"]
+	initialize: function () {
+		console.log(this.$el)
+	},
+
+	template: JST["show_notifications"],
+
+	render: function () {
+		var content = this.template();
+		this.$el.html(content);
+
+		return this
+	}
 })

@@ -16,7 +16,6 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 	},
 
 	events: {
-		"click button#notifications": "showNotifications",
 		"submit form#new-post": "createPost",
 		"submit form#new-comment": "createComment",
 		"click button.like-post": "likePost",
@@ -27,11 +26,6 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 		"click button.delete-comment": "deleteComment",
 		"click button.add-friend": "friendRequest",
 		"click button.accept-friendship": "addFriendship"
-	},
-
-	showNotifications: function () {
-		var view = new FacebookClone.Views.ShowNotifications()
-		$("body").html("hi")
 	},
 
 	createPost: function (event) {

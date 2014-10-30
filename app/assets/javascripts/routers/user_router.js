@@ -1,7 +1,6 @@
 FacebookClone.Routers.User = Backbone.Router.extend({
 	initialize: function (options) {
 		this.$rootEl = options.$rootEl
-		this.$notificationEl = options.$notificationEl
 	},
 
   routes: {
@@ -15,6 +14,13 @@ FacebookClone.Routers.User = Backbone.Router.extend({
 			model: user
 		});
 
-		this.$rootEl.html(view.render().$el)
+		this.$rootEl.html(view.render().$el);
+
+		var noticeView = new FacebookClone.Views.ShowNotifications();
+		$("nav div button#notifications").append(noticeView.render().$el);
+
+		$("nav div button#notifications").on("click", function () {
+			$("div.notifications").toggleClass("hidden")
+		});
 	}
 });

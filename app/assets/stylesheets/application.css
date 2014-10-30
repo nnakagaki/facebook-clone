@@ -27,44 +27,26 @@ li {
 }
 
 body {
+  font-family: sans-serif;
   width: 100%;
   height: 100%;
   background: rgb(233,234,237);
 }
 
-nav {
-  background: rgb(45,255,143);
-  margin-bottom: 10px;
-  height: 45px;
+.hidden {
+  display: none;
 }
 
-nav div.logo {
-	width: 22px;
-	height: 22px;
-	margin: 12px 12px 12px 60px;
-	padding: 0;
-	background: blue;
-	float: left;
+div.notifications {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: white;
+  right: 50px;
+  top: 33px;
+  box-shadow: 0 0 1em  grey;
 }
 
-nav div.right-nav {
-	float: left;
-	margin-left: 250px;
-	margin-top: 12px;
-}
-
-nav div.search-bar {
-	float: left;
-	margin: 12px 12px 12px 0;
-}
-
-nav div.search-bar input {
-	padding-left: 4px;
-	height: 21px;
-	width: 350px;
-	border-radius: 5px;
-	border: 0;
-}
 
 div#errors {
   width: 830px;
