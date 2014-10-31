@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.serializejson.min.js
-//= require turbolinks
+//= require filepicker.js
 //= require underscore
 //= require backbone
 //= require facebook_clone
