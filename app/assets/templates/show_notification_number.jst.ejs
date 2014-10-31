@@ -1,0 +1,19 @@
+<% var userNot = notifications.models %>
+<% if (userNot.length !== 0) { %>
+  <% var count = 0; %>
+  <% userNot.forEach(function(notice) { %>
+    <% if (!notice.get("seen")) { %>
+      <% count += 1 %>
+    <% } %>
+  <% }); %>
+  <% if (count === 0) { %>
+
+  <% } else if (count < 10) { %>
+    <div class="notification-num single show"><%= count %></div>
+  <% } else if (count < 100) { %>
+    <div class="notification-num double show"><%= count %></div>
+  <% } else { %>
+    <div class="notification-num double show"><%= count %></div>
+  <% } %>
+
+<% } %>

@@ -51,11 +51,10 @@
 
     <% if (user.get("is_current_user")) { %>
       <textarea name="post[description]" id="description" placeholder="What's on your mind?"></textarea>
-      <input type="submit" value="Post">
     <% } else if (user.get("is_friend")) { %>
       <textarea name="post[description]" id="description" placeholder="Write something..."></textarea>
-      <input type="submit" value="Post">
     <% } %>
+    <input class="submit hidden" type="submit" value="Post">
   </form>
   <ul>
 		<% var postSort = user.get("post_sort"); %>
@@ -66,7 +65,7 @@
 	      <% } else { %>
 	        <% name_string = "<a href='#/users/"+post.author_id+"'>"+post.author_full_name+"</a> > <a href='#/users/"+user.get("id")+"'>"+user.get("first_name")+user.get("last_name")+"</a>" %>
 	      <% } %>
-		    <li class="post">
+		    <li class="post" id="<%= post.id %>">
 		      <%= name_string + ": " + post.description %>
 	        <br>
 	        	<%= post.time %> ago
@@ -121,7 +120,7 @@
 	                <input type="hidden" name="current_user_page_id" value="<%= user.id %>">
 	                <input type="hidden" name="comment[post_id]" value="<%= post.id %>">
 	                <input id="comment" type="text" name="comment[description]" placeholder="Write a comment...">
-	                <input type="submit" value="Post">
+	                <input class="submit hidden" type="submit" value="Post">
 	              </form>
 	            </li>
 	          <% } %>

@@ -18,7 +18,8 @@
 	      <a href="<%= session_url %>" data-method="delete">Log Out</a>
 	      <a href="#/users/<%= current_user.id %>"><%= current_user.first_name %></a>
 	      <button id="notifications">
-	      	<%= current_user.notifications.count %>
+          <div class="not-place"></div>
+          <div class="not-button-place"></div>
 	      </button>
 	    <% else %>
 	      <a href="<%= new_user_url %>">Sign Up</a>

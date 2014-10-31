@@ -6,7 +6,9 @@ window.FacebookClone = {
   initialize: function() {
 		FacebookClone.users = new FacebookClone.Collections.Users();
 		FacebookClone.users.fetch();
-		new FacebookClone.Routers.User({
+    FacebookClone.notifications = new FacebookClone.Collections.Notifications();
+    FacebookClone.notifications.fetch();
+		FacebookClone.userRouter = new FacebookClone.Routers.User({
 							$rootEl: $("div.static")});
     Backbone.history.start();
   }

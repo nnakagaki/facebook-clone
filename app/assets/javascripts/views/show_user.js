@@ -25,7 +25,8 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 		"click button.delete-post": "deletePost",
 		"click button.delete-comment": "deleteComment",
 		"click button.add-friend": "friendRequest",
-		"click button.accept-friendship": "addFriendship"
+		"click button.accept-friendship": "addFriendship",
+    "focus form#new-post": "postSubmitButtonAppear"
 	},
 
 	createPost: function (event) {
@@ -215,5 +216,9 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 				}
 			}
 		});
-	}
+	},
+
+  postSubmitButtonAppear: function (event) {
+    this.$el.find("form#new-post input.submit").removeClass("hidden");
+  }
 })

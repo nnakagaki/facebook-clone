@@ -1,3 +1,23 @@
-<div class="notifications hidden">
-
-</div>
+<ul>
+  <% var userNot = user.get("notifications") %>
+  <li>Notifications</li>
+  <% if (userNot) { %>
+    <% userNot.forEach(function(notification) { %>
+      <li class="entry" id="<%= notification.wall %>" post-id="<%= notification.post_id %>">
+        <%= notification.author_full_name %>
+        <% if (notification.notifyable_type === "Post") { %>
+          wrote on your wall
+        <% } else if (notification.notifyable_type === "Comment") { %>
+          commented on a post you are following
+        <% } else if (notification.notifyable_type === "Like") { %>
+          liked something on a post you are following
+        <% } %>
+        <div class="small-logo"></div>
+        <div class="time">
+          <%= notification.time.substring(0,7)+"at "+ notification.time.substring(7,12) %>
+        </div>
+      </li>
+    <% }); %>
+  <% } %>
+</ul>
+<div class="arrow-up"></div>

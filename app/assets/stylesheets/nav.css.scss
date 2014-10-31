@@ -5,35 +5,54 @@ nav {
   position: relative;
 
   div.logo {
-	width: 22px;
-	height: 22px;
-	margin: 12px 12px 12px 60px;
-	padding: 0;
-	background: blue;
+  	width: 22px;
+  	height: 22px;
+  	margin: 12px 12px 12px 60px;
+  	padding: 0;
+  	background: blue;
     position: absolute;
     top: 0;
   }
 
   div.right-nav {
-	position: absolute;
+	  position: absolute;
     left: 500px;
-	margin-left: 250px;
-	margin-top: 12px;
+	  margin-left: 250px;
+	  margin-top: 9px;
     width: 200px;
+
+    a {
+      float: left;
+      margin-right: 5px;
+      margin-top: 3px;
+    }
+
+    button#notifications {
+      float: left;
+      background: rgb(0,169,237);
+      border: 0;
+      height: 25px;
+      width: 25px;
+      border-radius: 30px;
+
+      &.clicked {
+        background: rgb(0,199,255);
+      }
+    }
   }
 
   div.search-bar {
-	position: absolute;
+	  position: absolute;
     left: 90px;
-	margin: 11px 12px 12px 0;
+	  margin: 11px 12px 12px 0;
     width: 500px;
   }
 
   div.search-bar input {
-	padding-left: 4px;
-	height: 21px;
-	width: 350px;
-	border-radius: 5px;
-	border: 0;
+  	padding-left: 4px;
+  	height: 21px;
+  	width: 350px;
+  	border-radius: 5px;
+  	border: 0;
   }
 }
