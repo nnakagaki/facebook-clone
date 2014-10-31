@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141028222013) do
+ActiveRecord::Schema.define(version: 20141031133133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,13 +79,16 @@ ActiveRecord::Schema.define(version: 20141028222013) do
   add_index "posts", ["userwall_id"], name: "index_posts_on_userwall_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",           null: false
-    t.string   "first_name",      null: false
-    t.string   "last_name",       null: false
-    t.string   "password_digest", null: false
-    t.string   "session_token",   null: false
+    t.string   "email",                null: false
+    t.string   "first_name",           null: false
+    t.string   "last_name",            null: false
+    t.string   "password_digest",      null: false
+    t.string   "session_token",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "profile_pic_url"
+    t.string   "profile_pic_mini_url"
+    t.string   "cover_pic_url"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree

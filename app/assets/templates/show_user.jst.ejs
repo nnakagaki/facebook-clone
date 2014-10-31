@@ -1,5 +1,30 @@
 <div id="user-show">
 
+<div class="user-profile-top">
+  <% if (user.get("cover_pic_url")) { %>
+    <div class="cover-pic" style="background-image: url(<%= user.get("cover_pic_url") %>)">
+  <% } else { %>
+    <div class="cover-pic" style="background-image: url(https://www.filepicker.io/api/file/fsb56EOqRjCBRrfEkn7k)">
+  <% } %>
+    </div>
+
+  <% if (user.get("profile_pic_url")) { %>
+    <div class="profile-pic" style="background-image: url(<%= user.get("profile_pic_url") %>)">
+  <% } else { %>
+    <div class="profile-pic" style="background-image: url(https://www.filepicker.io/api/file/Qy6gLI1hStGBrEQBSQs1)">
+  <% } %>
+      <form class="upload-profile-pic">
+        <input
+          type="filepicker"
+          name="user[profile_pic_url]"
+          data-fp-mimetype="image/*"
+          data-fp-services="COMPUTER"
+          onchange="FacebookClone.currentUser.saveProfilePic(event)">
+      </form>
+    </div>
+  <h1><%= user.get("first_name") + " " + user.get("last_name") %></h1>
+</div>
+
 <% if (user.get("current_user_id")) { %>
     <div id="friend-requests">
       <% user.get("requests").forEach(function(request) { %>
@@ -8,8 +33,6 @@
       <% }); %>
     </div>
 <% } %>
-
-<h1><%= user.get("first_name") + " " + user.get("last_name") %></h1>
 
 <div class="add-friend">
   <% if (user.get("is_friend")) { %>

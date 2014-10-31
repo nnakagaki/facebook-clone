@@ -38,10 +38,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find(params[:id])
+    unless @user.update(user_params)
+      flash.now[:errors] = @user.errors.full_messages
+    end
+
+    redirect_to "#" + user_path(@user.id)
+  end
+
   private
   def user_params
-    params[:user][:first_name].capitalize!
-    params[:user][:last_name].capitalize!
-    params.require(:user).permit(:email, :password, :first_name, :last_name)
+    if params[:user][:first_name] && params[:user][:last_name]
+      params[:user][:first_name].capitalize!
+      params[:user][:last_name].capitalize!
+    end
+    params.require(:user).permit(:email, :password, :first_name, :last_name, :profile_pic_url)
   end
 end

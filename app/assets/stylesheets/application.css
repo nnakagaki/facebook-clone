@@ -26,7 +26,7 @@ li {
   list-style: none;
 }
 
-input, textarea {
+input[type=text], textarea {
   border: 0;
   font-size: 10pt;
 }
@@ -46,12 +46,59 @@ body {
   background: rgb(233,234,237);
 }
 
+a:visited {
+  text-decoration: none;
+}
+
 a:hover {
   text-decoration: underline;
 }
 
 .hidden {
   display: none;
+}
+
+div.user-profile-top {
+  border: 1px solid lightgrey;
+  margin-left: 7px;
+  background: white;
+  border-radius: 4px;
+  height: 320px;
+  width: 835px;
+}
+
+div.user-profile-top div.profile-pic {
+  position: absolute;
+  top: 185px;
+  left: 75px;
+  height: 150px;
+  width: 150px;
+  border: 8px solid white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 3pt 2pt grey;
+  background-size: cover;
+}
+
+div.user-profile-top div.cover-pic {
+  position: absolute;
+  top: 45px;
+  left: 57px;
+  height: 280px;
+  width: 837px;
+  background-size: cover;
+}
+
+div.user-profile-top h1 {
+  position: absolute;
+  top: 285px;
+  left: 258px;
+  font-size: 25px;
+}
+
+div.user-profile-top form.upload-profile-pic {
+  position: absolute;
+  bottom: 0;
+
 }
 
 div#user-show li.post.notify-post {
@@ -67,14 +114,6 @@ div#errors {
 div#user-show {
   width: 850px;
   margin-left: 50px;
-}
-
-div#user-show h1 {
-  padding: 10px;
-  border: 1px solid lightgrey;
-  margin: 7px;
-  background: white;
-  border-radius: 4px;
 }
 
 div#user-show div#left-side {

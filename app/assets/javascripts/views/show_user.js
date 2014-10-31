@@ -12,6 +12,10 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 		});
 
 		this.$el.html(content);
+
+    var $filePickerInput = this.$el.find("input[type=filepicker]");
+    filepicker.constructWidget($filePickerInput[0]);
+
 		return this;
 	},
 

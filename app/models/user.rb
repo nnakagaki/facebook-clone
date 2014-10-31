@@ -125,7 +125,7 @@ class User < ActiveRecord::Base
 
   private
   def preset_session_token
-    self.session_token = SecureRandom.urlsafe_base64(12)
+    self.session_token ||= SecureRandom.urlsafe_base64(12)
   end
 
 end

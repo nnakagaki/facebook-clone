@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: "users#static"
 
-  resources :users, only: [:new, :create, :show]
+  resources :users, only: [:new, :update, :create, :show]
   resource :session, only: [:new, :create, :destroy]
 
   resources :posts, only: [:create, :destroy]
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :friend_requests, only: [:create, :destroy]
 
   namespace :api, defaults: { format: :json } do
-    resources :users, only: [:index, :show]
+    resources :users, only: [:index, :show, :update]
     resources :posts, only: [:show, :create, :destroy]
     resources :comments, only: [:show, :create, :destroy]
     resources :likes, only: [:show, :create, :destroy]
