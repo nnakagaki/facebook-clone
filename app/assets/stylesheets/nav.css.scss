@@ -4,11 +4,12 @@ nav {
   position: relative;
 
   div.logo {
-  	width: 22px;
-  	height: 22px;
-  	margin: 12px 12px 12px 60px;
+  	width: 27px;
+  	height: 30px;
+  	margin: 8px 12px 12px 60px;
   	padding: 0;
-  	background: blue;
+  	background-image: asset-url("LLC-logo.png");
+    background-size: cover;
     position: absolute;
     top: 0;
   }
@@ -42,7 +43,7 @@ nav {
 
   div.search-bar {
 	  position: absolute;
-    left: 90px;
+    left: 100px;
 	  margin: 11px 12px 12px 0;
     width: 500px;
   }
