@@ -1,4 +1,18 @@
-json.(@user, :first_name, :last_name, :profile_pic_url)
+json.(@user, :first_name, :last_name)
+
+if @user.profile_pic_url
+	json.profile_pic_url @user.profile_pic_url
+else
+	json.profile_pic_url image_url('default_profile_pic.jpg')
+end
+
+if @user.cover_pic_url
+	json.cover_pic_url @user.cover_pic_url
+else
+	json.cover_pic_url image_url('default_cover_image.jpg')
+end
+
+
 
 if current_user
 	json.current_user_id current_user.id
