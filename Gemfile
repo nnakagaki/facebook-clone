@@ -53,3 +53,4 @@ end
 
 gem 'filepicker-rails'
 gem "figaro"
+gem "pusher"

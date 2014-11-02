@@ -1,3 +1,10 @@
+section.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2000;
+}
+
 nav {
   background: rgb(45,255,143);
   height: 45px;

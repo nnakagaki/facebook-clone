@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :friend, only: [:create, :destroy]
   resources :friend_requests, only: [:create, :destroy]
 
+  post "/pusher/auth", to: "pusher#auth"
+
   namespace :api, defaults: { format: :json } do
     resources :users, only: [:index, :show, :update]
     resources :posts, only: [:show, :create, :destroy]

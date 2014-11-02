@@ -14,7 +14,7 @@
  *= require_tree .
  */
 
-body, nav, div, h1, h2, ul, li, a {
+body, nav, div, h1, h2, ul, li, a, p {
   margin: 0;
   padding: 0;
   border: 0;
@@ -46,6 +46,10 @@ body {
   background: rgb(233,234,237);
 }
 
+a {
+  color: blue;
+}
+
 a:visited {
   text-decoration: none;
 }
@@ -56,6 +60,12 @@ a:hover {
 
 .hidden {
   display: none;
+}
+
+div.static {
+  position: relative;
+  z-index: 400;
+  padding-top: 45px;
 }
 
 div.user-profile-top {

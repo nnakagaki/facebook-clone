@@ -20,6 +20,6 @@ module FacebookClone
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.assets.paths << "#{ Rails.root }/app/assets/templates"
-    config.filepicker_rails.api_key = ENV["filepicker_api_key"]
+    config.filepicker_rails.api_key = ENV["FILEPICKER_API_KEY"]
   end
 end

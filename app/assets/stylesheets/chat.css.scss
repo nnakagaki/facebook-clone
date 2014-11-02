@@ -1,0 +1,91 @@
+div#chat-window {
+	float: right;
+	width: 200px;
+	height: 100vh;
+	background: white;
+	position: fixed;
+	right: 0;
+	margin: 80px 10px 0 0;
+	z-index: 1500;
+	border-right: 1px solid lightgrey;
+	border-left: 1px solid lightgrey;
+	border-top: 1px solid lightgrey;
+	border-radius: 5px;
+
+	p {
+		padding: 6px;
+		border-bottom: 1px solid lightgrey;
+		background: rgb(45,255,143);
+	}
+
+	ul li {
+		padding: 5px 5px 0 5px;
+	}
+}
+
+div#chat-boxes {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	z-index: 1300;
+
+	p {
+		padding: 6px;
+		border-bottom: 1px solid lightgrey;
+		background: rgb(85,255,173);
+	}
+
+	div.dummy-chat-box {
+		position: relative;
+		float: right;
+		width: 200px;
+		height: 250px;
+		background: blue;
+		margin-right: 10px;
+	}
+
+	div.chat-box {
+		position: relative;
+		float: right;
+		width: 225px;
+		height: 275px;
+		background: rgb(243,244,247);
+		border-radius: 5px 5px 0 0;
+		border-right: 1px solid lightgrey;
+		border-left: 1px solid lightgrey;
+		border-top: 1px solid lightgrey;
+		margin-right: 10px;
+
+		ul.message-display {
+			height: 214px;
+			width: 225px;
+			overflow-y: auto;
+			overflow-x: hidden;
+
+			li.you {
+				text-align: left;
+				padding: 3px;
+				background: white;
+				border: 1px solid lightgrey;
+				border-radius: 4px;
+				margin: 3px;
+			}
+
+			li.me {
+				text-align: right;
+				padding: 3px;
+				background: lightblue;
+				border: 1px solid lightgrey;
+				border-radius: 4px;
+				margin: 3px;
+			}
+		}
+
+		input {
+			padding: 6px 0 6px 3px;
+			border-top: 1px solid lightgrey;
+			background: white;
+			width: 222px;
+		}
+	}
+}
