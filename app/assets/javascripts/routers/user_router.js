@@ -25,6 +25,11 @@ FacebookClone.Routers.User = Backbone.Router.extend({
 
     this._swapView(userView, notView)
 
+    $("a[href='#/users/"+user.id+"']").on("click", function(event) {
+      console.log("refetch")
+      user.fetch();
+    });
+
     $("nav div button#notifications div.notifications").addClass("hidden")
 
 		$("nav div button#notifications").on("click", function () {

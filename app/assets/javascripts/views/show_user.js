@@ -13,6 +13,13 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 
 		this.$el.html(content);
 
+		var that = this;
+
+		this.$el.find("a[href='#/users/"+this.model.id+"']").on("click", function(event) {
+      console.log("refetch")
+      that.model.fetch();
+    });
+
     var $filePickerInput = this.$el.find("input[type=filepicker]");
     filepicker.constructWidget($filePickerInput[0]);
 

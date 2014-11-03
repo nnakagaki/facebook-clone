@@ -4,13 +4,14 @@
     <div class="cover-pic" style="background-image: url(<%= user.get("cover_pic_url") %>)">
     </div>
 
-    <div class="profile-pic" style="background-image: url(<%= user.get("profile_pic_url") %>)">
+    <div class="profile-pic" style="background-image: url(<%= user.get("profile_pic_mini_url") %>)">
       <form class="upload-profile-pic">
         <input
           type="filepicker"
           name="user[profile_pic_url]"
           data-fp-mimetype="image/*"
           data-fp-services="COMPUTER"
+          data-fp-button-text = ""
           onchange="FacebookClone.currentUser.saveProfilePic(event)">
       </form>
     </div>
@@ -76,16 +77,16 @@
 		<% if (postSort) { %>
 	    <% user.get("post_sort").forEach(function (post) { %>
 	      <% if (post.author_id === parseInt(user.get("id"))) { %>
-	        <% name_string = "<a href='#/users/"+user.get("id")+"'>"+user.get("first_name")+user.get("last_name")+"</a>" %>
+	        <% name_string = "<a href='#/users/"+user.get("id")+"'>"+user.get("first_name")+" "+user.get("last_name")+"</a>" %>
 	      <% } else { %>
-	        <% name_string = "<a href='#/users/"+post.author_id+"'>"+post.author_full_name+"</a> > <a href='#/users/"+user.get("id")+"'>"+user.get("first_name")+user.get("last_name")+"</a>" %>
+	        <% name_string = "<a href='#/users/"+post.author_id+"'>"+post.author_full_name+"</a> > <a href='#/users/"+user.get("id")+"'>"+user.get("first_name")+" "+user.get("last_name")+"</a>" %>
 	      <% } %>
 		    <li class="post" id="<%= post.id %>">
-		      <%= name_string + ": " + post.description %>
-	        <br>
-	        	<%= post.time %> ago
-	        <br>
-
+		    	<div class="small-profile-pic" style="background-image: url(<%= post.author_pic %>)"></div>
+		      <div class="name"><%= name_string %></div>
+		      <div class="time"><%= post.time %> ago</div>
+		      <div class="description"><%= post.description %></div>
+		      <div class="options">
 	        <% if (user.get("is_friend") || user.get("is_current_user")) { %>
 	          <% if (post.like_check.length !== 0) { %>
 	            <button class="unlike-post" id="<%= post.like_check[0].id %>">Unlike</button>
@@ -95,22 +96,23 @@
 	          <% if (user.get("is_current_user") || (user.get("current_user_id") === post.author_id)) { %>
 	            <button class="delete-post" id="<%= post.id %>">Delete</button>
 	          <% } %>
-	          <br>
 	        <% } %>
+	        </div>
 
-          <%= post.likes.length %> people like this post
+	        <div class="comments-wrapper">
+	        <div class="likes"><%= post.likes.length %> people like this post
           <% post.likes.forEach(function(like){ %>
-						<br>
             <a href="#/users/<%= like.user_id %>"><%= like.full_name %></a>
           <% }); %>
+          </div>
 	        <ul>
 	          <% post.comments.forEach(function(comment){ %>
 	            <li class="comment">
-	              <a href="#/users/<%= comment.author_id %>"><%= comment.author_full_name %></a>
-	              <%= ": "+comment.description %>
-	              <br>
-	              <%= comment.time %> ago
-	              <br>
+	            	<div class="small-profile-pic" style="background-image: url(<%= comment.author_pic %>)"></div>
+	            	<div class="comment-container">
+	              <div class="content"><a href="#/users/<%= comment.author_id %>"><%= comment.author_full_name %></a>
+	              <%= " "+comment.description %></div>
+	              <div class="time"><%= comment.time %> ago
 	              <% if (user.get("is_friend") || user.get("is_current_user")) { %>
 									<% if (comment.like_check.length !== 0) { %>
 	                  <button class="unlike-comment" id="<%= comment.like_check[0].id %>">Unlike</button>
@@ -121,16 +123,17 @@
 	                  <button class="delete-comment" id="<%= comment.id %>">Delete</button>
 	                <% } %>
 	              <% } %>
-	              <%= comment.likes.length %> likes!
+	              <%= comment.likes.length %> likes!</div>
 	              <% comment.likes.forEach(function(like){ %>
-									<br>
 	                <a href="#/users/<%= like.user_id %>"><%= like.full_name %></a>
 	              <% }); %>
+	              </div>
 	            </li>
 	          <% }); %>
-
+	          <li class="comment"></li>
 	          <% if (user.get("is_friend") || user.get("is_current_user")) { %>
-	            <li>
+	            <li class="comment-form">
+	            	<div class="small-profile-pic" style="background-image: url(<%= user.get('current_user_pic') %>)"></div>
 	              <form id="new-comment" method="post">
 	                <input type="hidden" name="current_user_page_id" value="<%= user.id %>">
 	                <input type="hidden" name="comment[post_id]" value="<%= post.id %>">
@@ -140,6 +143,7 @@
 	            </li>
 	          <% } %>
 	        </ul>
+	        </div>
 				</li>
 	    <% }); %>
 		<% } %>

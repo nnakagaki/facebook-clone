@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>FacebookClone</title>
+  <title>Life Long Connections</title>
+  <link rel="shortcut icon" type="image/x-icon" href="<%= image_url('favicon.ico') %>">
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
@@ -9,13 +10,20 @@
 	<script src="https://js.pusher.com/2.2/pusher.min.js"></script>
 </head>
 
+<script>
+	var chatAudio = new Audio("<%= audio_url('chat.mp3') %>");
+	chatAudio.volume = 0.2;
+</script>
+
 <body>
 	<section class="nav">
 	  <nav>
 			<div class="logo"></div>
 			<div class="search-bar">
 				<input type="text" placeholder="Search for people, places, and things">
-				<button>Search</button>
+				<div class="container">
+					<button></button>
+				</div>
 			</div>
 			<div class="right-nav">
 		    <% if current_user %>
@@ -54,44 +62,52 @@
   <div id="chat-boxes">
   	<div class='dummy-chat-box'><div>
   </div>
-
 </body>
 
 <script>
-	var pusher = new Pusher('86598b559e05cdb6cd56');
+	var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>');
 	var channel = pusher.subscribe("presence-chatRoom");
 	pusher.connection.bind("state_change", function() {
 		$("span#conn-status").text(pusher.connection.state);
 	});
 
 	var clientMessageBindFunc = function (data) {
+		chatAudio.currentTime = 0;
+		chatAudio.play();
+
 		if ($("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").length !== 0) {
-			$("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").append("<li class='you'>"+data.message+"</li>");
+			$("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").append("<li><div class='small-profile-pic' style='background-image: url("+data.pic+")'></div><div class='left-arrow'></div><p class='you'>"+data.message+"</p></li>");
 		} else {
-			$("div#chat-boxes").append("<div class='chat-box' id='"+data.chatID+"'><p>"+data.name+"</p><ul class='message-display'></ul><input id='"+data.chatID+"' name='"+data.name+"'  type='text'><div>");
+			$("div#chat-boxes").append("<div class='chat-box' id='"+data.chatID+"'><p>"+data.name+"</p><button class='delete'>&#10006;</button><ul class='message-display'></ul><input id='"+data.chatID+"' name='"+data.name+"' pic='"+channel.members.me.info.pic+"'  type='text'><div>");
 			$("div#chat-boxes div#"+data.chatID+".chat-box input").on("keypress", keyPressBindFunc);
-			$("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").append("<li class='you'>"+data.message+"</li>");
+			$("div#chat-boxes div#"+data.chatID+".chat-box button.delete").on("click", function (event) {
+  				$("div#chat-boxes div#"+data.chatID+".chat-box").remove();
+  			});
+			$("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").append("<li><div class='small-profile-pic' style='background-image: url("+data.pic+")'></div><div class='left-arrow'></div><p class='you'>"+data.message+"</p></li>");
 		}
 		$("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").scrollTop($("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display")[0].scrollHeight);
 	}
 
 	var keyPressBindFunc = function(event) {
 		if (event.charCode === 13 && $(event.currentTarget).val() !== "") {
+			chatAudio.currentTime = 0;
+			chatAudio.play();
+
 			var message = $(event.currentTarget).val();
 			$(event.currentTarget).val("");
 
 			pusher.channels.channels["private-chatRoom-"+event.currentTarget.id].trigger("client-message", {
 				message: message,
 				chatID: event.currentTarget.id,
-				name: $(event.currentTarget).attr("name")
+				name: $(event.currentTarget).attr("name"),
+				pic: $(event.currentTarget).attr("pic")
 			});
-			$("div#chat-boxes div#"+event.currentTarget.id+".chat-box ul.message-display").append("<li class='me'>"+message+"</li>")
-			$("div#chat-boxes div#"+event.currentTarget.id+".chat-box ul.message-display").scrollTop($("div#chat-boxes div#"+event.currentTarget.id+".chat-box ul.message-display")[0].scrollHeight);
+			$("div#chat-boxes div#"+event.currentTarget.id+".chat-box ul.message-display").append("<li><div class='right-arrow'></div><p class='me'>"+message+"</p></li>").scrollTop($("div#chat-boxes div#"+event.currentTarget.id+".chat-box ul.message-display")[0].scrollHeight);
 		}
 	}
 
-	var memberAddFunc = function (member, myID, myName) {
-		$("ul#members").append("<li id='"+member.id+"'>"+member.info.name+"</li>");
+	var memberAddFunc = function (member, myID, myName, myPic) {
+		$("ul#members").append("<li id='"+member.id+"'><div class='small-profile-pic' style='background-image: url("+member.info.pic+")'></div><div class='name'>"+member.info.name+"</div></li>");
 
   	if (myID < member.id) {
   		var chatID = myID+"-"+member.id;
@@ -105,9 +121,14 @@
 
   	$("ul#members li#"+member.id).on("click", function() {
   		if ($("div#"+chatID+".chat-box").length === 0) {
-  			$("div#chat-boxes").append("<div class='chat-box' id='"+chatID+"'><p>"+member.info.name+"</p><ul class='message-display'></ul><input id='"+chatID+"' name='"+myName+"' type='text'><div>");
+  			$("div#chat-boxes").append("<div class='chat-box' id='"+chatID+"'><p>"+member.info.name+"</p><button class='delete'>&#10006;</button><ul class='message-display'></ul><input id='"+chatID+"' name='"+myName+"' pic='"+myPic+"' type='text'><div>");
+  			$("div#chat-boxes div#"+chatID+".chat-box input").focus();
 
   			$("div#chat-boxes div#"+chatID+".chat-box input").on("keypress", keyPressBindFunc);
+
+  			$("div#chat-boxes div#"+chatID+".chat-box button.delete").on("click", function (event) {
+  				$("div#chat-boxes div#"+chatID+".chat-box").remove();
+  			});
   		}
 		});
 	};
@@ -115,10 +136,11 @@
 	channel.bind('pusher:subscription_succeeded', function(members) {
 		var myID = channel.members.myID.toString();
 		var myName = channel.members.me.info.name;
+		var myPic = channel.members.me.info.pic;
 
   	members.each( function (member) {
   		if (myID !== member.id) {
-  			memberAddFunc(member, myID, myName);
+  			memberAddFunc(member, myID, myName, myPic);
   		}
   	});
 	});
@@ -126,8 +148,9 @@
 	channel.bind('pusher:member_added', function(member) {
 		var myID = channel.members.myID.toString();
 		var myName = channel.members.me.info.name;
+		var myPic = channel.members.me.info.pic;
 
-  	memberAddFunc(member, myID, myName);
+  	memberAddFunc(member, myID, myName, myPic);
 	});
 
 	channel.bind('pusher:member_removed', function(member) {

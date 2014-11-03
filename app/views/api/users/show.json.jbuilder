@@ -1,9 +1,9 @@
 json.(@user, :first_name, :last_name)
 
-if @user.profile_pic_url
-	json.profile_pic_url @user.profile_pic_url
+if @user.profile_pic_mini_url
+	json.profile_pic_mini_url @user.profile_pic_mini_url
 else
-	json.profile_pic_url image_url('default_profile_pic.jpg')
+	json.profile_pic_mini_url image_url('default_profile_pic.jpg')
 end
 
 if @user.cover_pic_url
@@ -16,6 +16,12 @@ end
 
 if current_user
 	json.current_user_id current_user.id
+
+	if current_user.profile_pic_mini_url
+		json.current_user_pic current_user.profile_pic_mini_url
+	else
+		json.current_user_pic image_url('default_profile_pic.jpg')
+	end
 
 	is_friend = current_user.friends_with?(@user)
 	json.is_friend is_friend
@@ -61,6 +67,11 @@ json.post_sort post_sort.each do |post|
 	json.id post.id
 	json.author_id post.author_id
 	json.author_full_name post.author.full_name
+	if post.author.profile_pic_mini_url
+		json.author_pic post.author.profile_pic_mini_url
+	else
+		json.author_pic image_url('default_profile_pic.jpg')
+	end
 	json.description post.description
 	json.time time_ago_in_words(post.updated_at)
 
@@ -78,6 +89,11 @@ json.post_sort post_sort.each do |post|
 		json.id comment.id
 		json.author_id comment.author.id
 		json.author_full_name comment.author.full_name
+		if comment.author.profile_pic_mini_url
+			json.author_pic comment.author.profile_pic_mini_url
+		else
+			json.author_pic image_url('default_profile_pic.jpg')
+		end
 		json.description comment.description
 		json.time time_ago_in_words(comment.updated_at)
 

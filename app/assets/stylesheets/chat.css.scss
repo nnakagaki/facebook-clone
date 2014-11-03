@@ -16,10 +16,29 @@ div#chat-window {
 		padding: 6px;
 		border-bottom: 1px solid lightgrey;
 		background: rgb(45,255,143);
+		border-radius: 5px 5px 0 0;
 	}
 
 	ul li {
-		padding: 5px 5px 0 5px;
+		padding: 3px 5px 3px 5px;
+		height: 100%;
+
+		div.small-profile-pic {
+			height: 32px;
+			width: 32px;
+			float: left;
+			background-size: cover;
+		}
+
+		div.name {
+			margin: 8px 0 8px 40px;
+			font-size: 14px
+		}
+
+		&:hover {
+			background: rgb(220,240,220);
+			cursor: pointer;
+		}
 	}
 }
 
@@ -33,6 +52,7 @@ div#chat-boxes {
 		padding: 6px;
 		border-bottom: 1px solid lightgrey;
 		background: rgb(85,255,173);
+		border-radius: 5px 5px 0 0;
 	}
 
 	div.dummy-chat-box {
@@ -54,30 +74,84 @@ div#chat-boxes {
 		border-right: 1px solid lightgrey;
 		border-left: 1px solid lightgrey;
 		border-top: 1px solid lightgrey;
+		box-shadow: 0 0 0.4em grey;
 		margin-right: 10px;
+		font-size: 14px;
+
+		button.delete {
+			position: absolute;
+			top: 0;
+			right: 0;
+			padding: 0;
+			border: 0;
+			font-size: 20px;
+			background: transparent;
+			margin: 5px 5px 0 0;
+
+			&:hover {
+				color: white;
+			}
+		}
 
 		ul.message-display {
 			height: 214px;
 			width: 225px;
-			overflow-y: auto;
+			overflow-y: scroll;
 			overflow-x: hidden;
 
-			li.you {
-				text-align: left;
-				padding: 3px;
-				background: white;
-				border: 1px solid lightgrey;
-				border-radius: 4px;
-				margin: 3px;
-			}
+			li {
+				width: 200px;
+				height: 32px;
+				position: relative;
 
-			li.me {
-				text-align: right;
-				padding: 3px;
-				background: lightblue;
-				border: 1px solid lightgrey;
-				border-radius: 4px;
-				margin: 3px;
+				div.small-profile-pic {
+					width: 28px;
+					height: 28px;
+					margin: 2px 2px 2px 5px;
+					background-size: cover;
+					float: left;
+					border-radius: 4px
+				}
+
+				div.right-arrow {
+					width: 0;
+					height: 0;
+					border-top: 6px solid transparent;
+					border-bottom: 6px solid transparent;
+					border-left: 6px solid lightblue;
+					position: absolute;
+					right: -5px;
+					top: 9px;
+				}
+
+				div.left-arrow {
+					width: 0;
+					height: 0;
+					border-top: 6px solid transparent;
+					border-bottom: 6px solid transparent;
+					border-right: 6px solid blue;
+					position: absolute;
+					left: 36px;
+					top: 9px;
+				}
+
+				p.you {
+					float: left;
+					padding: 3px;
+					background: white;
+					border: 1px solid lightgrey;
+					border-radius: 4px;
+					margin: 3px 3px 3px 6px;
+				}
+
+				p.me {
+					float: right;
+					padding: 3px;
+					background: lightblue;
+					border: 1px solid lightgrey;
+					border-radius: 4px;
+					margin: 3px 0 3px 3px;
+				}
 			}
 		}
 

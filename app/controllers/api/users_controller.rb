@@ -24,7 +24,7 @@ module Api
 
     private
     def user_params
-      params.require(:user).permit(:profile_pic_url)
+      params.require(:user).permit(:profile_pic_url, :profile_pic_mini_url)
     end
   end
 end

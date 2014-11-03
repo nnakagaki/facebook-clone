@@ -31,6 +31,10 @@ input[type=text], textarea {
   font-size: 10pt;
 }
 
+button {
+  border: 0;
+}
+
 button:focus, input:focus, textarea:focus {
   outline: none;
 }
@@ -43,7 +47,7 @@ body {
   font-family: sans-serif;
   width: 100%;
   height: 100%;
-  background: rgb(233,234,237);
+  background: rgb(223,232,224);
 }
 
 a {
@@ -124,98 +128,4 @@ div#errors {
 div#user-show {
   width: 850px;
   margin-left: 50px;
-}
-
-div#user-show div#left-side {
-  width: 320px;
-  float: left;
-}
-
-div#user-show div#left-side h2 {
-  background: rgb(246,247,248);
-  padding: 10px;
-  border-radius: 4px 4px 0 0;
-}
-
-div#user-show div#left-side ul {
-  width: 300px;
-  padding: 10px 0 10px 10px;
-}
-
-div#user-show div#left-side ul li {
-  border-top: 1px solid grey;
-  padding: 4px;
-}
-
-div#user-show div#left-side ul li:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
-
-div#user-show div#left-side ul li:last-child {
-  padding-bottom: 0;
-}
-
-div#user-show div#right-side {
-  width: 470px;
-  float: right;
-}
-
-form#new-post input.submit {
-  float: right;
-  border-radius: 4px;
-}
-
-div#user-show li.post {
-  width: 470px;
-  float: right;
-  padding: 10px;
-  border: 1px solid lightgrey;
-  margin: 7px;
-  background: white;
-  border-radius: 4px;
-  box-shadow: 0 0 2em rgb(233,234,237);
-  transition: box-shadow 0.5s;
-}
-
-div#user-show li.post li.comment {
-  background: lightgrey;
-  padding: 3px;
-  border-top: 1px solid grey;
-}
-
-div#user-show form#new-post {
-  width: 470px;
-  float: right;
-  padding: 10px;
-  border: 1px solid lightgrey;
-  margin: 7px;
-  background: white;
-  border-radius: 4px;
-}
-
-div#user-show div.info {
-  width: 320px;
-  float: left;
-  border: 1px solid lightgrey;
-  margin: 7px;
-  background: white;
-  border-radius: 4px;
-}
-
-div#user-show div.add-friend {
-  width: 815px;
-  padding: 10px;
-  border: 1px solid lightgrey;
-  margin: 7px;
-  background: white;
-  border-radius: 4px;
-}
-
-div#user-show form#new-post textarea {
-  width: 464px;
-}
-
-div#user-show form#new-comment input#comment {
-  width: 464px;
 }

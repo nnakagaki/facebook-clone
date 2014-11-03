@@ -53,13 +53,31 @@ nav {
     left: 100px;
 	  margin: 11px 12px 12px 0;
     width: 500px;
-  }
 
-  div.search-bar input {
-  	padding-left: 4px;
-  	height: 21px;
-  	width: 350px;
-  	border-radius: 5px;
-  	border: 0;
+    input {
+      padding-left: 4px;
+      height: 21px;
+      width: 350px;
+      border-radius: 5px 0 0 5px;
+      border: 0;
+    }
+
+    div.container {
+      background-color: white;
+      position: absolute;
+      left: 354px;
+      top: 0;
+      padding: 3px 3px 1px 3px;
+      border-radius: 0 5px 5px 0;
+    }
+
+    button {
+      background-image: image-url("search.png");
+      background-size: cover;
+      height: 16px;
+      width: 16px;
+      border: 0;
+      background-color: white;
+    }
   }
 }
