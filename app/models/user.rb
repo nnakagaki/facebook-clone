@@ -7,6 +7,11 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
+  include PgSearch
+  pg_search_scope :search_by_full_name,
+    :against => [:first_name, :last_name],
+    :using => { :tsearch => {:prefix => true} }
+
   has_many :authored_posts,
     class_name: "Post",
     foreign_key: :author_id,

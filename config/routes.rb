@@ -11,8 +11,10 @@ Rails.application.routes.draw do
   resources :friend_requests, only: [:create, :destroy]
 
   post "/pusher/auth", to: "pusher#auth"
+  post "/pusher/webhook", to: "pusher#webhook"
 
   namespace :api, defaults: { format: :json } do
+    get "/users/search", to: "users#search"
     resources :users, only: [:index, :show, :update]
     resources :posts, only: [:show, :create, :destroy]
     resources :comments, only: [:show, :create, :destroy]

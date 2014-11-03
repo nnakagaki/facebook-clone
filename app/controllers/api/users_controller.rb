@@ -22,6 +22,10 @@ module Api
       end
     end
 
+    def search
+      render json: User.search_by_full_name(params[:query])
+    end
+
     private
     def user_params
       params.require(:user).permit(:profile_pic_url, :profile_pic_mini_url)

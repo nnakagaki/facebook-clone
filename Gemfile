@@ -54,3 +54,4 @@ end
 gem 'filepicker-rails'
 gem "figaro"
 gem "pusher"
+gem 'pg_search'

@@ -24,6 +24,7 @@
 				<div class="container">
 					<button></button>
 				</div>
+        <ul class="search-results"></ul>
 			</div>
 			<div class="right-nav">
 		    <% if current_user %>
@@ -63,6 +64,33 @@
   	<div class='dummy-chat-box'><div>
   </div>
 </body>
+
+<script>
+  $("nav div.search-bar input").on("keyup", function (event) {
+    var query = $(event.currentTarget).val();
+    $.ajax({
+      url: "<%= api_users_search_url %>",
+      type: "GET",
+      data: {query: query},
+      success: function( resp ) {
+        $("nav div.search-bar ul.search-results").html("")
+        resp.forEach(function (user) {
+          if (user.profile_pic_mini_url) {
+            var profilePicUrl = user.profile_pic_mini_url;
+          } else {
+            var profilePicUrl = "<%= image_url('default_profile_pic.jpg') %>";
+          }
+          $("nav div.search-bar ul.search-results").append("<li><div class='small-profile-pic' style='background-image: url("+profilePicUrl+")'></div><a href='#/users/"+user.id+"'><div class='name'>"+user.first_name+" "+user.last_name+"</div></a></li>")
+        });
+
+        $("nav div.search-bar ul.search-results li a").on("click", function (event) {
+          $("nav div.search-bar ul.search-results").html("");
+          $("nav div.search-bar input").val("");
+        });
+      }
+    });
+  });
+</script>
 
 <script>
 	var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>');
