@@ -14,7 +14,7 @@
 	var chatAudio = new Audio("<%= audio_url('chat.mp3') %>");
 	chatAudio.volume = 0.2;
 </script>
-
+<% if current_user %>
 <body>
 	<section class="nav">
 	  <nav>
@@ -202,5 +202,52 @@
 	});
 
 </script>
+
+<% else %>
+
+<body class="not-signed-in">
+  <nav>
+    <div class="wrap">
+      <div class="site-name">Life Long Connections</div>
+      <form action="<%= session_url %>" method="post">
+        <input type="hidden"
+               name="authenticity_token"
+               value="<%= form_authenticity_token %>">
+        <div class="email">
+          <label for="email">Email</label>
+          <input type="text" name="user[email]" id="email">
+        </div>
+        <div class="password">
+          <label for="password">Password</label>
+          <input type="password" name="user[password]" id="password">
+        </div>
+        <div class="submit">
+          <input type="submit" value="Log In">
+        </div>
+      </form>
+    </div>
+  </nav>
+  <div class="wrap">
+    <div class="description">
+      <p>Connect with friends and the world on Life Long Connections.</p>
+    </div>
+    <div class="sign-up">
+      <h1>Sign Up</h1>
+      <p>It's free and always will be</p>
+      <form action="<%= users_url %>" method="post">
+        <input type="hidden"
+               name="authenticity_token"
+               value="<%= form_authenticity_token %>">
+        <input type="text" name="user[first_name]" id="first-name" placeholder="First name">
+        <input type="text" name="user[last_name]" id="last-name" placeholder="Last name">
+        <input type="text" name="user[email]" id="email" placeholder="Email">
+        <input type="password" name="user[password]" id="password" placeholder="Password">
+        <input type="submit" value="submit">
+      </form>
+    </div>
+  </div>
+</body>
+
+<% end %>
 
 </html>

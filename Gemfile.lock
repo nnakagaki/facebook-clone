@@ -75,6 +75,7 @@ GEM
       thor (~> 0.14)
     filepicker-rails (1.2.0)
       rails (>= 3.2)
+    geocoder (1.2.5)
     hike (1.2.3)
     htmlentities (4.3.2)
     httpclient (2.5.2)
@@ -202,6 +203,7 @@ DEPENDENCIES
   faker
   figaro
   filepicker-rails
+  geocoder
   jbuilder (~> 2.0)
   jquery-rails
   link_thumbnailer

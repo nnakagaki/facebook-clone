@@ -9,3 +9,5 @@
 100.times do
   User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.free_email, password_digest: Faker::Internet.password(10, 20), profile_pic_mini_url: Faker::Avatar.image)
 end
+
+User.create(first_name: "King", last_name: "Kong", email: "kingkong", password: "kingkong")

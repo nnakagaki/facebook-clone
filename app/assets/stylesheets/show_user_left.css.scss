@@ -38,9 +38,12 @@ div#user-show div#left-side {
         margin: 5px;
 
         a {
+          width: 96px;
+          padding-top: 78px;
           position: absolute;
           bottom: 0;
           left: 0;
+          vertical-align: bottom;
         }
       }
     }

@@ -57,3 +57,4 @@ gem "figaro"
 gem "pusher"
 gem 'pg_search'
 gem 'link_thumbnailer'
+gem "geocoder"

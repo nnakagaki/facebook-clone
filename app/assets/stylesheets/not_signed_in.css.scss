@@ -1,0 +1,171 @@
+body.not-signed-in {
+  nav {
+    height: 82px;
+    width: 100%;
+    color: darkgreen;
+
+    div.wrap {
+      height: 82px;
+      width: 980px;
+      margin: auto;
+
+      div.site-name {
+        float: left;
+        font-size: 35px;
+        font-weight: bold;
+        margin: 30px 0 0 0;
+      }
+
+      form {
+        float: right;
+        margin: 15px 0 0 0;
+
+        div.email {
+          width: 150px;
+          float: left;
+          margin: 0 15px 0 0;
+        }
+
+        div.password {
+          width: 150px;
+          float: left;
+          margin: 0 15px 0 0;
+        }
+
+        div.submit {
+          width: 35px;
+          float: left;
+          margin: 20px 15px 0 0;
+
+          input {
+            height: 24px;
+            padding: 2px 5px 5px 5px;
+            background: linear-gradient(limegreen, green);
+
+            &:focus {
+              background: linear-gradient(green, limegreen);
+            }
+          }
+        }
+
+        div label {
+          font-size: 13px;
+          padding: 0 0 5px 0;
+          display: block;
+        }
+
+        div input {
+          display: block;
+          border: 1px solid limegreen;
+          padding: 3px;
+
+          &:focus {
+            box-shadow: 0 0 0.5em green;
+          }
+        }
+      }
+    }
+  }
+
+  div.wrap {
+    width: 980px;
+    height: 100px;
+    margin: auto;
+    margin-top: 20px;
+
+    div.description {
+      margin: 50px 0 0 0;
+      width: 400px;
+      float: left;
+
+      p {
+        font-size: 25px;
+        font-weight: bold;
+        line-height: 35px;
+      }
+    }
+
+    div.sign-up {
+      width: 400px;
+      float: right;
+
+      h1 {
+        margin: 0 0 10px 0;
+      }
+
+      p {
+        font-size: 16px;
+        margin: 0 0 20px 0;
+      }
+
+      form input {
+        font-size: 21px;
+        padding: 8px 10px 8px 10px;
+        border: 1px solid limegreen;
+        border-radius: 10px;
+        margin: 0 10px 10px 0;
+
+        &:focus {
+          box-shadow: 0 0 0.5em green;
+        }
+
+        &#first-name {
+          width: 170px;
+          margin: 0 10px 10px 0;
+        }
+
+        &#last-name {
+          width: 170px;
+          margin: 0 0 10px 0;
+        }
+
+        &#email {
+          width: 377px;
+          margin: 0 0 10px 0;
+        }
+
+        &#password {
+          width: 377px;
+          margin: 0 0 10px 0;
+        }
+
+        &[type=submit] {
+          background: linear-gradient(limegreen, green);
+          color: white;
+
+          &:focus {
+            background: linear-gradient(green, limegreen);
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ h5 {}
