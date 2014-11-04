@@ -8,7 +8,7 @@ div#user-show div#left-side {
     border-radius: 4px 4px 0 0;
   }
 
-  ul {
+  ul.info {
     width: 300px;
     padding: 10px 0 10px 10px;
 
@@ -23,6 +23,25 @@ div#user-show div#left-side {
 
       &:last-child {
         padding-bottom: 0;
+      }
+    }
+  }
+
+  ul.friends {
+    li {
+      div.small-profile-pic {
+        width: 96px;
+        height: 96px;
+        background-size: cover;
+        float: left;
+        position: relative;
+        margin: 5px;
+
+        a {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+        }
       }
     }
   }

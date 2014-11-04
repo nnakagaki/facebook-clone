@@ -59,7 +59,13 @@ json.is_current_user is_current_user
 friends = @user.friends
 json.friends friends.each do |friend_id|
 	json.id friend_id
-	json.full_name User.find(friend_id).full_name
+	friend = User.find(friend_id)
+	json.full_name friend.full_name
+	if friend.profile_pic_mini_url
+		json.pic friend.profile_pic_mini_url
+	else
+		json.pic image_url("default_profile_pic.jpg")
+	end
 end
 
 post_sort = @user.post_sort

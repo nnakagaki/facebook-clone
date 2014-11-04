@@ -40,7 +40,7 @@
 <div id="left-side">
   <div class="info">
     <h2>About</h2>
-    <ul>
+    <ul class="info">
       <li>Work</li>
       <li>High School</li>
       <li>Current City</li>
@@ -50,11 +50,15 @@
 
   <div class="info">
     <h2>Friends</h2>
-    <ul>
+    <ul class="friends">
 			<% var friends = user.get("friends") %>
 			<% if (friends) { %>
 				<% friends.forEach(function(friend){ %>
-	        <li><a href="<%= '#/users/'+friend.id %>"><%= friend.full_name %></a></li>
+	        <li>
+	        	<div class="small-profile-pic" style="background-image: url(<%= friend.pic %>)">
+	        		<a href="<%= '#/users/'+friend.id %>"><%= friend.full_name %></a>
+	        	</div>
+	        </li>
 	      <% }); %>
 			<% } %>
     </ul>
