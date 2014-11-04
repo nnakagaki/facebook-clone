@@ -76,6 +76,13 @@ json.post_sort post_sort.each do |post|
 	json.id post.id
 	json.author_id post.author_id
 	json.author_full_name post.author.full_name
+	if post.embed
+		json.embed post.embed
+	end
+
+	if post.address
+		json.address post.address.split(",")[1,2]
+	end
 	if post.author.profile_pic_mini_url
 		json.author_pic post.author.profile_pic_mini_url
 	else

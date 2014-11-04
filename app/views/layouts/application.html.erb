@@ -71,6 +71,18 @@
 </body>
 
 <script>
+  $("div#chat-window p").on("click", function (event) {
+    $("div#chat-window").toggleClass("chat-hide");
+  })
+
+  $(window).on("resize", function (event) {
+    if (window.innerWidth < 1130) {
+      $("div#chat-window").addClass("chat-hide");
+    } else {
+      $("div#chat-window").removeClass("chat-hide");
+    }
+  })
+
   $("nav div.search-bar input").on("keyup", function (event) {
     var query = $(event.currentTarget).val();
     $.ajax({

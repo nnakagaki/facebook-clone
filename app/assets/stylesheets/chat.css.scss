@@ -12,6 +12,11 @@ div#chat-window {
 	border-top: 1px solid lightgrey;
 	border-radius: 5px;
 
+	&.chat-hide {
+		height: 31px;
+		bottom: 0;
+	}
+
 	p {
 		padding: 6px;
 		border-bottom: 1px solid lightgrey;
@@ -19,25 +24,27 @@ div#chat-window {
 		border-radius: 5px 5px 0 0;
 	}
 
-	ul li {
-		padding: 3px 5px 3px 5px;
-		height: 100%;
+	ul {
+		li {
+			padding: 3px 5px 3px 5px;
+			height: 100%;
 
-		div.small-profile-pic {
-			height: 32px;
-			width: 32px;
-			float: left;
-			background-size: cover;
-		}
+			div.small-profile-pic {
+				height: 32px;
+				width: 32px;
+				float: left;
+				background-size: cover;
+			}
 
-		div.name {
-			margin: 8px 0 8px 40px;
-			font-size: 14px
-		}
+			div.name {
+				margin: 8px 0 8px 40px;
+				font-size: 14px
+			}
 
-		&:hover {
-			background: rgb(220,240,220);
-			cursor: pointer;
+			&:hover {
+				background: rgb(220,240,220);
+				cursor: pointer;
+			}
 		}
 	}
 }

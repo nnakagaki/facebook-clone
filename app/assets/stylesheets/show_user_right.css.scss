@@ -19,6 +19,56 @@ div#user-show div#right-side {
       float: right;
       border-radius: 4px;
     }
+
+    div.feed-loc {
+      iframe {
+        margin-top: 10px;
+        border-top: 1px dashed lightgrey;
+        padding: 10px 0 10px 0;
+      }
+
+      div.buzzfeed {
+        clear: both;
+        width: 470px;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px dashed lightgrey;
+        position: relative;
+
+        a {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+        }
+
+        div.picture {
+          width: 470px;
+          height: 246px;
+          background-size: cover;
+          margin: auto;
+        }
+
+        div.title {
+          width: 450px;
+          margin: auto;
+          padding: 10px;
+          font-size: 18px;
+          border-right: 1px solid lightgrey;
+          border-left: 1px solid lightgrey;
+        }
+
+        div.description {
+          width: 450px;
+          padding: 0 10px 10px 10px;
+          margin: auto;
+          font-size: 14px;
+          margin-bottom: 10px;
+          border-right: 1px solid lightgrey;
+          border-left: 1px solid lightgrey;
+          border-bottom: 1px solid lightgrey;
+        }
+      }
+    }
   }
 
   li.post {

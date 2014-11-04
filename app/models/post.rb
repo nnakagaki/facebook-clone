@@ -1,4 +1,7 @@
 class Post < ActiveRecord::Base
+	reverse_geocoded_by :latitude, :longitude
+	after_validation :reverse_geocode
+
 	validates :author, :wall_user, :description, presence: true
 
 	belongs_to :author,

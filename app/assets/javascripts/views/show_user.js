@@ -1,6 +1,9 @@
 FacebookClone.Views.ShowUser = Backbone.View.extend({
 	initialize: function (options) {
 		this.listenTo(this.model, "sync", this.render)
+		this.keys = {17: false, 86: false, 91: false, 93: false}
+		this.youtubeReg = /(https?:\/\/www\.youtu\.?be\.com\/[^\s]+)/;
+		this.youtubeReg2 = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
 	},
 
 	template: JST["show_user"],
@@ -37,7 +40,9 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 		"click button.delete-comment": "deleteComment",
 		"click button.add-friend": "friendRequest",
 		"click button.accept-friendship": "addFriendship",
-    "focus form#new-post": "postSubmitButtonAppear"
+    "focus form#new-post": "postSubmitButtonAppear",
+		"keydown form#new-post": "pasteHandle",
+		"keyup form#new-post": "keyCacheClear",
 	},
 
 	createPost: function (event) {
@@ -231,5 +236,49 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 
   postSubmitButtonAppear: function (event) {
     this.$el.find("form#new-post input.submit").removeClass("hidden");
-  }
+  },
+
+	pasteHandle: function (event) {
+		if (event.which in this.keys) {
+			this.keys[event.which] = true;
+		}
+
+		if ((this.keys[86] && this.keys[91]) || (this.keys[86] && this.keys[93])) {
+			var that = this;
+			$("form#new-post").one("keyup", function (event) {
+				var formValue = $("form#new-post textarea").val();
+				var localHostMatch = formValue.match(/(localhost)/);
+				if (!localHostMatch) {
+					var webMatch = formValue.match(/(https?:\/\/[^\s]+)/);
+					if (webMatch) {
+						var youtubeMatch = formValue.match(that.youtubeReg);
+						if (youtubeMatch) {
+							var youtubeMatch2 = youtubeMatch[0].match(that.youtubeReg2);
+							if (youtubeMatch2 && youtubeMatch2[2].length == 11) {
+								var embed = "<iframe width='470' height='276' src='//www.youtube.com/embed/"+youtubeMatch2[2]+"' frameborder='0' allowfullscreen></iframe>";
+								$("form#new-post").append("<input type='hidden' name='post[embed]' value=\""+embed+"\">");
+								$("form#new-post div.feed-loc").append(embed);
+							}
+						} else {
+							$.ajax({
+								url: "/api/posts/embed",
+								type: "GET",
+								data: {match: webMatch[0]},
+								success: function (res) {
+									$("form#new-post").append("<input type='hidden' name='post[embed]' value=\""+res["info"]+"\">");
+									$("form#new-post div.feed-loc").append(res["info"])
+								}
+							});
+						}
+					}
+				}
+			});
+		}
+	},
+
+	keyCacheClear: function (event) {
+		for (var i in this.keys) {
+			this.keys[i] = false;
+		}
+	}
 })

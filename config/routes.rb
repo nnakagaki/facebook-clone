@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     get "/users/search", to: "users#search"
     resources :users, only: [:index, :show, :update]
+    get "/posts/embed", to: "posts#embed"
     resources :posts, only: [:show, :create, :destroy]
     resources :comments, only: [:show, :create, :destroy]
     resources :likes, only: [:show, :create, :destroy]

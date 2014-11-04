@@ -32,9 +32,33 @@ module Api
       render json: @post
     end
 
+    def embed
+      link_info = LinkThumbnailer.generate(params[:match])
+      info = ""
+      info += "<div class='buzzfeed'>"
+      info += "<a href='#{link_info.url}' target='_blank'></a>"
+
+      unless link_info.images.length == 0
+        info += "<div class='picture' style='background-image: url(#{link_info.images[0].src})'></div>"
+      end
+
+      link_info.title.gsub!(/"/, "&#34;")
+      link_info.title.gsub!(/</, "&#60;")
+      link_info.title.gsub!(/>/, "&#62;")
+      link_info.description.gsub!(/"/, "&#34;")
+      link_info.description.gsub!(/</, "&#60;")
+      link_info.description.gsub!(/>/, "&#62;")
+
+      info += "<div class='title'>#{link_info.title}</div>"
+      info += "<div class='description'>#{link_info.description}</div>"
+      info += "</div>"
+
+      render json: {info: info}
+    end
+
   	private
   	def post_params
-  		params.require(:post).permit(:description, :userwall_id)
+  		params.require(:post).permit(:description, :userwall_id, :longitude, :latitude, :embed)
   	end
   end
 end
