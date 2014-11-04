@@ -31,6 +31,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.3.6)
     arel (5.0.1.20140414130214)
     backbone-on-rails (1.1.1.0)
       actionmailer
@@ -66,11 +67,16 @@ GEM
     ejs (1.1.1)
     erubis (2.7.0)
     execjs (2.2.2)
+    faker (1.4.3)
+      i18n (~> 0.5)
+    fastimage (1.6.4)
+      addressable (~> 2.3, >= 2.3.5)
     figaro (1.0.0)
       thor (~> 0.14)
     filepicker-rails (1.2.0)
       rails (>= 3.2)
     hike (1.2.3)
+    htmlentities (4.3.2)
     httpclient (2.5.2)
     i18n (0.6.11)
     jbuilder (2.2.4)
@@ -80,13 +86,25 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
+    link_thumbnailer (2.3.1)
+      activesupport (>= 3.0)
+      fastimage (~> 1.6)
+      json (~> 1.7, >= 1.7.7)
+      net-http-persistent (~> 2.9)
+      nokogiri (~> 1.6)
+      rake (>= 0.9)
+      video_info (~> 2.3)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_portile (0.6.0)
     minitest (5.4.2)
     multi_json (1.10.1)
+    net-http-persistent (2.9.4)
+    nokogiri (1.6.3.1)
+      mini_portile (= 0.6.0)
     pg (0.17.1)
     pg_search (0.7.8)
       activerecord (>= 3.1)
@@ -167,6 +185,10 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    video_info (2.3.2)
+      addressable
+      htmlentities
+      multi_json
 
 PLATFORMS
   ruby
@@ -177,10 +199,12 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   coffee-rails (~> 4.0.0)
+  faker
   figaro
   filepicker-rails
   jbuilder (~> 2.0)
   jquery-rails
+  link_thumbnailer
   pg
   pg_search
   pry-rails

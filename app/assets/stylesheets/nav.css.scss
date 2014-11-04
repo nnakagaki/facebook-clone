@@ -28,6 +28,13 @@ nav {
 	  margin-top: 9px;
     width: 200px;
 
+    div.small-profile-pic {
+      height: 35px;
+      width: 35px;
+      float: left;
+      background-size: cover;
+    }
+
     a {
       float: left;
       margin-right: 5px;

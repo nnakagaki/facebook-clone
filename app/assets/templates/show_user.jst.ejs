@@ -73,6 +73,9 @@
     <input class="submit hidden" type="submit" value="Post">
   </form>
   <ul>
+    <% var youtubeReg = /(https?:\/\/www\.youtu\.?be\.com\/[^\s]+)/; %>
+    <% var youtubeReg2 = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/; %>
+
 		<% var postSort = user.get("post_sort"); %>
 		<% if (postSort) { %>
 	    <% user.get("post_sort").forEach(function (post) { %>
@@ -86,6 +89,25 @@
 		      <div class="name"><%= name_string %></div>
 		      <div class="time"><%= post.time %> ago</div>
 		      <div class="description"><%= post.description %></div>
+          <% var match1 = post.description.match(youtubeReg) %>
+          <% if (match1) { %>
+            <% var match2 = match1[0].match(youtubeReg2) %>
+            <% if (match2 && match2[2].length == 11) { %>
+              <%= "<iframe width='470' height='276' src='//www.youtube.com/embed/"+match2[2]+"' frameborder='0' allowfullscreen></iframe>" %>
+            <% } %>
+          <% } else { %>
+            <% if (post.buzzfeed) { %>
+              <div class="buzzfeed">
+                <a href="<%= post.buzzfeed.url %>"></a>
+                <% if (post.buzzfeed.images.length !== 0) { %>
+                  <div class="picture" style="background-image: url(<%= post.buzzfeed.images[0].src %>)"></div>
+                <% } %>
+                <div class="title"><%= post.buzzfeed.title %></div>
+                <div class="description"><%= post.buzzfeed.description %></div>
+              </div>
+            <% } %>
+	        <% } %>
+
 		      <div class="options">
 	        <% if (user.get("is_friend") || user.get("is_current_user")) { %>
 	          <% if (post.like_check.length !== 0) { %>

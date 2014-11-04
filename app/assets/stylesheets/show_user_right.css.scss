@@ -1,129 +1,176 @@
 div#user-show div#right-side {
   width: 470px;
   float: right;
-}
 
-div#user-show form#new-post {
-  width: 470px;
-  float: right;
-  padding: 10px;
-  border: 1px solid lightgrey;
-  margin: 7px;
-  background: white;
-  border-radius: 4px;
-}
+  form#new-post {
+    width: 470px;
+    float: right;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    margin: 7px;
+    background: white;
+    border-radius: 4px;
 
-div#user-show form#new-post textarea {
-  width: 464px;
-}
+    textarea {
+      width: 464px;
+    }
 
-form#new-post input.submit {
-  float: right;
-  border-radius: 4px;
-}
+    input.submit {
+      float: right;
+      border-radius: 4px;
+    }
+  }
 
-div#user-show li.post {
-  width: 490px;
-  float: right;
-  border: 1px solid lightgrey;
-  margin: 7px;
-  background: white;
-  border-radius: 4px;
-  box-shadow: 0 0 2em rgb(230,237,230);
-  transition: box-shadow 0.5s;
-}
+  li.post {
+    width: 490px;
+    float: right;
+    border: 1px solid lightgrey;
+    margin: 7px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 0 2em rgb(230,237,230);
+    transition: box-shadow 0.5s;
 
-div#user-show li.post div.small-profile-pic {
-  width: 40px;
-  height: 40px;
-  background-size: cover;
-  float: left;
-  margin: 10px;
-}
 
-div#user-show li.post div.name {
-  margin: 13px 0 3px 0;
-}
+    &.notify-post {
+      box-shadow: 0 0 2em rgb(0,255,182);
+    }
 
-div#user-show li.post div.time {
-  font-size: 12px;
-  color: rgb(162,162,162);
-}
+    div.buzzfeed {
+      width: 490px;
+      position: relative;
 
-div#user-show li.post div.description {
-  clear: both;
-  margin: 10px 0 10px 10px;
-}
+      a {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
 
-div#user-show li.post div.options {
-  padding: 0 10px 10px 10px;
-  border-bottom: 1px solid lightgrey;
-}
+      div.picture {
+        width: 470px;
+        height: 246px;
+        background-size: cover;
+        margin: auto;
+      }
 
-div#user-show li.post div.comments-wrapper {
-  background: rgb(240,241,242);
-  border-radius: 4px;
-}
+      div.title {
+        width: 450px;
+        margin: auto;
+        padding: 10px;
+        font-size: 18px;
+        border-right: 1px solid lightgrey;
+        border-left: 1px solid lightgrey;
+      }
 
-div#user-show li.post div.likes {
-  padding: 10px 0 10px 0;
-  margin: 0 10px 0 10px;
-  font-size: 14px;
-  border-bottom: 1px solid lightgrey;
-}
+      div.description {
+        width: 450px;
+        padding: 0 10px 10px 10px;
+        margin: auto;
+        font-size: 14px;
+        margin-bottom: 10px;
+        border-right: 1px solid lightgrey;
+        border-left: 1px solid lightgrey;
+        border-bottom: 1px solid lightgrey;
+      }
+    }
 
-div#user-show li.post li.comment {
-  margin-bottom: 5px;
-  font-size: 14px;
-  clear: both;
-}
+    iframe {
+      padding: 10px;
+    }
 
-div#user-show li.post li.comment div.small-profile-pic {
-  width: 32px;
-  height: 32px;
-  background-size: cover;
-  float: left;
-  margin: 10px;
-}
+    div.small-profile-pic {
+      width: 40px;
+      height: 40px;
+      background-size: cover;
+      float: left;
+      margin: 10px;
+    }
 
-div#user-show li.post li.comment div.comment-container {
-  float: left;
-  width: 420px;
-}
+    div.name {
+      margin: 13px 0 3px 0;
+    }
 
-div#user-show li.post li.comment div.content {
-  padding: 10px 0 3px 0;
-  margin: 0;
-  line-height: 125%;
-}
+    div.time {
+      font-size: 12px;
+      color: rgb(162,162,162);
+    }
 
-div#user-show li.post li.comment div.time {
-  font-size: 12px;
-  color: rgb(162,162,162);
-}
+    div.description {
+      clear: both;
+      margin: 10px 0 10px 10px;
+    }
 
-div#user-show li.post li.comment-form {
-  font-size: 14px;
-  clear: both;
-}
+    div.options {
+      padding: 0 10px 10px 10px;
+      border-bottom: 1px solid lightgrey;
+    }
 
-div#user-show li.post li.comment-form div.small-profile-pic {
-  width: 32px;
-  height: 32px;
-  background-size: cover;
-  float: left;
-  margin: 10px;
-}
+    div.comments-wrapper {
+      background: rgb(240,241,242);
+      border-radius: 4px;
+    }
 
-div#user-show li.post li.comment-form form#new-comment {
-  padding-bottom: 10px;
-  border-radius: 0 0 4px 4px;
-}
+    div.likes {
+      padding: 10px 0 10px 0;
+      margin: 0 10px 0 10px;
+      font-size: 14px;
+      border-bottom: 1px solid lightgrey;
+    }
 
-div#user-show li.post li.comment-form form#new-comment input#comment {
-  width: 412px;
-  border: 1px solid lightgrey;
-  padding: 7px 3px 7px 3px;
-  font-size: 14px;
-  margin-top: 10px;
+    li.comment {
+      margin-bottom: 5px;
+      font-size: 14px;
+      clear: both;
+
+      div.small-profile-pic {
+        width: 32px;
+        height: 32px;
+        background-size: cover;
+        float: left;
+        margin: 10px;
+      }
+
+      div.comment-container {
+        float: left;
+        width: 420px;
+      }
+
+      div.content {
+        padding: 10px 0 3px 0;
+        margin: 0;
+        line-height: 125%;
+      }
+
+      div.time {
+        font-size: 12px;
+        color: rgb(162,162,162);
+      }
+    }
+
+    li.comment-form {
+      font-size: 14px;
+      clear: both;
+
+      div.small-profile-pic {
+        width: 32px;
+        height: 32px;
+        background-size: cover;
+        float: left;
+        margin: 10px;
+      }
+
+      form#new-comment {
+        padding-bottom: 10px;
+        border-radius: 0 0 4px 4px;
+      }
+
+      form#new-comment input#comment {
+        width: 412px;
+        border: 1px solid lightgrey;
+        padding: 7px 3px 7px 3px;
+        font-size: 14px;
+        margin-top: 10px;
+      }
+    }
+  }
 }

@@ -23,7 +23,7 @@ module Api
     end
 
     def search
-      render json: User.search_by_full_name(params[:query])
+      render json: User.search_by_full_name(params[:query]).first(8)
     end
 
     private

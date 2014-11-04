@@ -63,6 +63,9 @@ json.friends friends.each do |friend_id|
 end
 
 post_sort = @user.post_sort
+
+buzzfeedReg = /(https?:\/\/www\.buzzfeed\.com\/[^\s]+)/
+
 json.post_sort post_sort.each do |post|
 	json.id post.id
 	json.author_id post.author_id
@@ -74,6 +77,11 @@ json.post_sort post_sort.each do |post|
 	end
 	json.description post.description
 	json.time time_ago_in_words(post.updated_at)
+
+  buzzmatch = buzzfeedReg.match(post.description)
+  if buzzmatch
+    json.buzzfeed LinkThumbnailer.generate(buzzmatch[0])
+  end
 
 	if current_user
 		like_check = current_user_likes.where({likable_type: "Post", likable_id: post.id})

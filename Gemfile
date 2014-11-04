@@ -45,6 +45,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'quiet_assets'
+  gem 'faker'
 end
 
 group :production do
@@ -55,3 +56,4 @@ gem 'filepicker-rails'
 gem "figaro"
 gem "pusher"
 gem 'pg_search'
+gem 'link_thumbnailer'

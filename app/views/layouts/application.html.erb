@@ -29,6 +29,11 @@
 			<div class="right-nav">
 		    <% if current_user %>
 		      <a href="<%= session_url %>" data-method="delete">Log Out</a>
+          <% if current_user.profile_pic_url %>
+            <div class='small-profile-pic' style='background-image: url("<%= current_user.profile_pic_url %>")'></div>
+          <% else %>
+            <div class='small-profile-pic' style='background-image: url("<%= image_url('default_profile_pic.jpg') %>")'></div>
+          <% end %>
 		      <a href="#/users/<%= current_user.id %>"><%= current_user.first_name %></a>
 		      <button id="notifications">
 	          <div class="not-place"></div>

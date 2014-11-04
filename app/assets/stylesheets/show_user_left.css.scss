@@ -1,47 +1,38 @@
 div#user-show div#left-side {
   width: 320px;
   float: left;
-}
 
-div#user-show div#left-side h2 {
-  background: rgb(246,247,248);
-  padding: 10px;
-  border-radius: 4px 4px 0 0;
-}
+  h2 {
+    background: rgb(246,247,248);
+    padding: 10px;
+    border-radius: 4px 4px 0 0;
+  }
 
-div#user-show div#left-side ul {
-  width: 300px;
-  padding: 10px 0 10px 10px;
-}
+  ul {
+    width: 300px;
+    padding: 10px 0 10px 10px;
 
-div#user-show div#left-side ul li {
-  border-top: 1px solid grey;
-  padding: 4px;
-}
+    li {
+      border-top: 1px solid grey;
+      padding: 4px;
 
-div#user-show div#left-side ul li:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
+      &:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
 
-div#user-show div#left-side ul li:last-child {
-  padding-bottom: 0;
-}
+      &:last-child {
+        padding-bottom: 0;
+      }
+    }
+  }
 
-div#user-show div.info {
-  width: 320px;
-  float: left;
-  border: 1px solid lightgrey;
-  margin: 7px;
-  background: white;
-  border-radius: 4px;
-}
-
-div#user-show div.add-friend {
-  width: 815px;
-  padding: 10px;
-  border: 1px solid lightgrey;
-  margin: 7px;
-  background: white;
-  border-radius: 4px;
+  div.info {
+    width: 320px;
+    float: left;
+    border: 1px solid lightgrey;
+    margin: 7px;
+    background: white;
+    border-radius: 4px;
+  }
 }

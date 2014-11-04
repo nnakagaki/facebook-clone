@@ -115,10 +115,6 @@ div.user-profile-top form.upload-profile-pic {
 
 }
 
-div#user-show li.post.notify-post {
-  box-shadow: 0 0 2em rgb(0,255,182);
-}
-
 div#errors {
   width: 830px;
   margin-left: 60px;
@@ -128,4 +124,13 @@ div#errors {
 div#user-show {
   width: 850px;
   margin-left: 50px;
+}
+
+div#user-show div.add-friend {
+  width: 815px;
+  padding: 10px;
+  border: 1px solid lightgrey;
+  margin: 7px;
+  background: white;
+  border-radius: 4px;
 }
