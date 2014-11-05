@@ -22,6 +22,10 @@ div#chat-window {
 		border-bottom: 1px solid lightgrey;
 		background: rgb(45,255,143);
 		border-radius: 5px 5px 0 0;
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
 	ul {
@@ -60,6 +64,10 @@ div#chat-boxes {
 		border-bottom: 1px solid lightgrey;
 		background: rgb(85,255,173);
 		border-radius: 5px 5px 0 0;
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
 	div.dummy-chat-box {
@@ -67,7 +75,7 @@ div#chat-boxes {
 		float: right;
 		width: 200px;
 		height: 1px;
-		background: blue;
+		background: transparent;
 		margin-right: 10px;
 	}
 
@@ -84,6 +92,12 @@ div#chat-boxes {
 		box-shadow: 0 0 0.4em grey;
 		margin-right: 10px;
 		font-size: 14px;
+
+		&.chat-hide {
+			height: 29px;
+			bottom: 0;
+			margin-top: 246px;
+		}
 
 		button.delete {
 			position: absolute;
@@ -102,7 +116,6 @@ div#chat-boxes {
 
 		ul.message-display {
 			height: 214px;
-			width: 225px;
 			overflow-y: scroll;
 			overflow-x: hidden;
 

@@ -124,7 +124,10 @@
 			$("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").append("<li><div class='small-profile-pic' style='background-image: url("+data.pic+")'></div><div class='left-arrow'></div><p class='you'>"+data.message+"</p></li>");
 		} else {
 			$("div#chat-boxes").append("<div class='chat-box' id='"+data.chatID+"'><p>"+data.name+"</p><button class='delete'>&#10006;</button><ul class='message-display'></ul><input id='"+data.chatID+"' name='"+data.name+"' pic='"+channel.members.me.info.pic+"'  type='text'><div>");
-			$("div#chat-boxes div#"+data.chatID+".chat-box input").on("keypress", keyPressBindFunc);
+			$("div#chat-boxes div#"+data.chatID+".chat-box p").on("click", function (event) {
+        $("div#chat-boxes div#"+data.chatID+".chat-box").toggleClass("chat-hide");
+      })
+      $("div#chat-boxes div#"+data.chatID+".chat-box input").on("keypress", keyPressBindFunc);
 			$("div#chat-boxes div#"+data.chatID+".chat-box button.delete").on("click", function (event) {
   				$("div#chat-boxes div#"+data.chatID+".chat-box").remove();
   			});
@@ -167,7 +170,10 @@
   	$("ul#members li#"+member.id).on("click", function() {
   		if ($("div#"+chatID+".chat-box").length === 0) {
   			$("div#chat-boxes").append("<div class='chat-box' id='"+chatID+"'><p>"+member.info.name+"</p><button class='delete'>&#10006;</button><ul class='message-display'></ul><input id='"+chatID+"' name='"+myName+"' pic='"+myPic+"' type='text'><div>");
-  			$("div#chat-boxes div#"+chatID+".chat-box input").focus();
+  			$("div#chat-boxes div#"+chatID+".chat-box p").on("click", function (event) {
+          $("div#chat-boxes div#"+chatID+".chat-box").toggleClass("chat-hide");
+        })
+        $("div#chat-boxes div#"+chatID+".chat-box input").focus();
 
   			$("div#chat-boxes div#"+chatID+".chat-box input").on("keypress", keyPressBindFunc);
 
