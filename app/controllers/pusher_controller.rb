@@ -3,41 +3,44 @@ class PusherController < ApplicationController
 
 	def auth
 		if current_user
-      if current_user.profile_pic_mini_url
-        pic = current_user.profile_pic_mini_url
+      channel = params[:channel_name]
+      if channel[0..15] == "private-chatRoom"
+        chatter_ids = channel[17..channel.length-1].split("-")
+        if chatter_ids.include?(current_user.id.to_s)
+          if_auth_passed
+        else
+          render :text => "Forbidden", :status => '403'
+        end
+      elsif channel[0..19] == "private-notification"
+        not_id = channel[21..channel.length-1]
+        if not_id == current_user.id.to_s
+          if_auth_passed
+        else
+          render :text => "Forbidden", :status => '403'
+        end
       else
-        pic = ActionController::Base.helpers.image_url("default_profile_pic.jpg")
+        if_auth_passed
       end
-      response = Pusher[params[:channel_name]].authenticate(params[:socket_id],{
-      		user_id: current_user.id,
-          user_info: {
-            name: current_user.full_name,
-            pic: pic
-          }
-      	})
-      render :json => response
     else
       render :text => "Forbidden", :status => '403'
     end
 	end
 
-  def webhook
-    webhook = Pusher::WebHook.new(request)
-    if webhook.valid?
-      webhook.events.each do |event|
-        case event["name"]
-        when 'channel_occupied'
-          puts "Channel occupied: #{event["channel"]}"
-        when 'channel_vacated'
-          puts "Channel vacated: #{event["channel"]}"
-        when 'client_event'
-          puts event["data"]
-        end
-      end
-      render text: 'ok'
+  private
+  def if_auth_passed
+    if current_user.profile_pic_mini_url
+      pic = current_user.profile_pic_mini_url
     else
-      render text: 'invalid', status: 401
+      pic = ActionController::Base.helpers.image_url("default_profile_pic.jpg")
     end
+    response = Pusher[params[:channel_name]].authenticate(params[:socket_id],{
+        user_id: current_user.id,
+        user_info: {
+          name: current_user.full_name,
+          pic: pic
+        }
+      })
+    render :json => response
   end
 
 end

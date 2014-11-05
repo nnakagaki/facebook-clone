@@ -112,6 +112,8 @@
 <script>
 	var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>');
 	var channel = pusher.subscribe("presence-chatRoom");
+  var notificationChannel = pusher.subscribe("private-notification-<%= current_user.id %>")
+
 	pusher.connection.bind("state_change", function() {
 		$("span#conn-status").text(pusher.connection.state);
 	});

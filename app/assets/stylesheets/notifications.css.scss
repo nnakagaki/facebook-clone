@@ -19,20 +19,6 @@ div.notifications {
     border-right: 10px solid transparent;
   }
 
-  div.notification-num {
-    position: absolute;
-    width: 50px;
-
-    &.single {
-      top: -32px;
-      right: 8px;
-    }
-    &.double {
-      top: -32px;
-      right: 2px;
-    }
-  }
-
   ul {
     width: 100%;
     height: 400px;
@@ -60,4 +46,10 @@ div.notifications {
   li.entry:hover {
     background: rgb(159,255,182);
   }
+}
+
+div.not-button-place div.notification-num {
+  background: red;
+  border-radius: 4px;
+  color: white;
 }
