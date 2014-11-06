@@ -53,6 +53,13 @@ div#chat-window {
 	}
 }
 
+@-webkit-keyframes flash {
+	0% { background: rgb(85,255,173); }
+	50% { background: rgb(85,255,173); }
+	51% { background: rgb(85,255,223); }
+	100% { background: rgb(85,255,223); }
+}
+
 div#chat-boxes {
 	position: fixed;
 	bottom: 0;
@@ -64,6 +71,10 @@ div#chat-boxes {
 		border-bottom: 1px solid lightgrey;
 		background: rgb(85,255,173);
 		border-radius: 5px 5px 0 0;
+
+		&.flashing:first-child {
+			-webkit-animation: flash 1.5s infinite;
+		}
 
 		&:hover {
 			cursor: pointer;
@@ -121,7 +132,7 @@ div#chat-boxes {
 
 			li {
 				width: 200px;
-				height: 32px;
+				min-height: 32px;
 				position: relative;
 
 				div.small-profile-pic {
@@ -161,7 +172,9 @@ div#chat-boxes {
 					background: white;
 					border: 1px solid lightgrey;
 					border-radius: 4px;
-					margin: 3px 3px 3px 6px;
+					margin: 3px 0 3px 6px;
+					word-wrap: break-word;
+					max-width: 150px;
 				}
 
 				p.me {
@@ -171,6 +184,11 @@ div#chat-boxes {
 					border: 1px solid lightgrey;
 					border-radius: 4px;
 					margin: 3px 0 3px 3px;
+					word-wrap: break-word;
+				}
+
+				div.clear {
+					clear: both;
 				}
 			}
 		}

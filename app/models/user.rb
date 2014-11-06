@@ -54,6 +54,8 @@ class User < ActiveRecord::Base
     primary_key: :id,
     inverse_of: :author
 
+  has_many :messages, inverse_of: :user
+
 
   def self.find_by_credentials(user_params)
     @user = User.find_by_email(user_params[:email])

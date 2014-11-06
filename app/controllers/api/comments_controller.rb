@@ -15,6 +15,7 @@ module Api
                                       post_id: params[:comment][:post_id],
                                       notifyable_id: @comment.id,
                                       notifyable_type: "Comment")
+            Pusher.trigger("private-notification-#{user.id}", "notification", {})
           end
         end
         current_user.follows.create(post_id: params[:comment][:post_id])

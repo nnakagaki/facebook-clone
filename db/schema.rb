@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104210128) do
+ActiveRecord::Schema.define(version: 20141105152515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(version: 20141104210128) do
     t.integer  "user_id",      null: false
     t.integer  "likable_id",   null: false
     t.string   "likable_type", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", force: true do |t|
+    t.integer  "user_id",                    null: false
+    t.text     "message",                    null: false
+    t.string   "chat_id",                    null: false
+    t.boolean  "read",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

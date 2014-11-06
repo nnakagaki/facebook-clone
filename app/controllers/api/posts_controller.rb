@@ -15,6 +15,7 @@ module Api
                                      post_id: @post.id,
                                      notifyable_id: @post.id,
                                      notifyable_type: "Post")
+          Pusher.trigger("private-notification-#{@user.id}", "notification", {})
         end
         @post.follows.create(user_id: current_user.id)
         render json: @post

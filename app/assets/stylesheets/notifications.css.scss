@@ -3,7 +3,7 @@ div.notifications {
   width: 400px;
   height: 400px;
   background: white;
-  right: 50px;
+  right: -15px;
   top: 36px;
   box-shadow: 0 0 1em  grey;
   z-index: 500;
@@ -48,8 +48,16 @@ div.notifications {
   }
 }
 
-div.not-button-place div.notification-num {
-  background: red;
-  border-radius: 4px;
-  color: white;
+div.not-button-place {
+  position: relative;
+
+  div.notification-num {
+    position: absolute;
+    background: red;
+    border-radius: 4px;
+    color: white;
+    padding: 0 3px 1px 3px;
+    top: -11px;
+    right: -7px;
+  }
 }

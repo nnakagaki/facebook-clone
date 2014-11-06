@@ -16,12 +16,10 @@ FacebookClone.Views.ShowNotifications = Backbone.View.extend({
       user: this.model
 		});
 		this.$el.html(content);
-
 		var content2 = this.template2({
 		  notifications: this.collection
 		});
 		$("nav div button#notifications div.not-button-place").html(content2);
-
 		return this
 	},
 

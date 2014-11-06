@@ -1,0 +1,8 @@
+<ul>
+  <li>Friend Requests</li>
+  <% if (requests) { %>
+    <% requests.forEach(function (request) { %>
+      <%= "<li><a href='#/users/"+request.get('requestor_id')+"'>"+request.get("full_name")+"</a></li>" %>
+    <% }) %>
+  <% } %>
+</ul>

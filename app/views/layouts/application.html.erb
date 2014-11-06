@@ -27,22 +27,24 @@
         <ul class="search-results"></ul>
 			</div>
 			<div class="right-nav">
-		    <% if current_user %>
-		      <a href="<%= session_url %>" data-method="delete">Log Out</a>
-          <% if current_user.profile_pic_url %>
-            <div class='small-profile-pic' style='background-image: url("<%= current_user.profile_pic_url %>")'></div>
-          <% else %>
-            <div class='small-profile-pic' style='background-image: url("<%= image_url('default_profile_pic.jpg') %>")'></div>
-          <% end %>
-		      <a href="#/users/<%= current_user.id %>"><%= current_user.first_name %></a>
-		      <button id="notifications">
-	          <div class="not-place"></div>
-	          <div class="not-button-place"></div>
-		      </button>
-		    <% else %>
-		      <a href="<%= new_user_url %>">Sign Up</a>
-		      <a href="<%= new_session_url %>">Log In</a>
-		    <% end %>
+        <% if current_user.profile_pic_url %>
+          <div class='small-profile-pic' style='background-image: url("<%= current_user.profile_pic_url %>")'></div>
+        <% else %>
+          <div class='small-profile-pic' style='background-image: url("<%= image_url('default_profile_pic.jpg') %>")'></div>
+        <% end %>
+	      <a href="#/users/<%= current_user.id %>"><%= current_user.first_name %></a>
+        <button id="friend-requests">
+        </button>
+	      <button id="notifications">
+          <div class="not-place"></div>
+          <div class="not-button-place"></div>
+	      </button>
+        <button id="nav-options">
+          <ul class="hidden">
+            <li><a href="<%= session_url %>" data-method="delete">Log Out</a></li>
+          </ul>
+          <div class="arrow-up hidden"></div>
+        </button>
 			</div>
 	  </nav>
   </section>
@@ -71,6 +73,19 @@
 </body>
 
 <script>
+  $("button#nav-options").on("click", function (event) {
+    $("button#nav-options ul").toggleClass("hidden");
+    $("button#nav-options div.arrow-up").toggleClass("hidden");
+    setTimeout(function () {
+      $(window).one("click", function (event) {
+        if (event.target !== $("button#nav-options")[0]) {
+          $("button#nav-options ul").addClass("hidden");
+          $("button#nav-options div.arrow-up").addClass("hidden");
+        }
+      });
+    }, 100);
+  })
+
   $("div#chat-window p").on("click", function (event) {
     $("div#chat-window").toggleClass("chat-hide");
   })
@@ -123,19 +138,40 @@
 		chatAudio.play();
 
 		if ($("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").length !== 0) {
-			$("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").append("<li><div class='small-profile-pic' style='background-image: url("+data.pic+")'></div><div class='left-arrow'></div><p class='you'>"+data.message+"</p></li>");
+			$("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").append("<li><div class='small-profile-pic' style='background-image: url("+data.pic+")'></div><div class='left-arrow'></div><p class='you'>"+data.message+"</p><div class='clear'></div></li>");
+      $("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").scrollTop($("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display")[0].scrollHeight);
+      $("div#"+data.chatID+".chat-box p").addClass("flashing");
 		} else {
 			$("div#chat-boxes").append("<div class='chat-box' id='"+data.chatID+"'><p>"+data.name+"</p><button class='delete'>&#10006;</button><ul class='message-display'></ul><input id='"+data.chatID+"' name='"+data.name+"' pic='"+channel.members.me.info.pic+"'  type='text'><div>");
 			$("div#chat-boxes div#"+data.chatID+".chat-box p").on("click", function (event) {
         $("div#chat-boxes div#"+data.chatID+".chat-box").toggleClass("chat-hide");
       })
       $("div#chat-boxes div#"+data.chatID+".chat-box input").on("keypress", keyPressBindFunc);
+      $("div#chat-boxes div#"+data.chatID+".chat-box input").on("focus", function (event) {
+        $("div#"+data.chatID+".chat-box p").removeClass("flashing");
+      });
 			$("div#chat-boxes div#"+data.chatID+".chat-box button.delete").on("click", function (event) {
   				$("div#chat-boxes div#"+data.chatID+".chat-box").remove();
   			});
-			$("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").append("<li><div class='small-profile-pic' style='background-image: url("+data.pic+")'></div><div class='left-arrow'></div><p class='you'>"+data.message+"</p></li>");
+
+      $.ajax({
+        url: "/messages/past",
+        type: "GET",
+        data: { chat_id: data.chatID },
+        success: function (res) {
+          res.forEach(function (message) {
+            if (<%= current_user.id %> === message.user_id) {
+              $("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").append("<li><div class='right-arrow'></div><p class='me'>"+message.message+"</p><div class='clear'></div></li>");
+            } else {
+              $("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").append("<li><div class='small-profile-pic' style='background-image: url("+data.pic+")'></div><div class='left-arrow'></div><p class='you'>"+message.message+"</p><div class='clear'></div></li>");
+            }
+          });
+
+          $("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").scrollTop($("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display")[0].scrollHeight);
+          $("div#"+data.chatID+".chat-box p").addClass("flashing");
+        }
+      });
 		}
-		$("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display").scrollTop($("div#chat-boxes div#"+data.chatID+".chat-box ul.message-display")[0].scrollHeight);
 	}
 
 	var keyPressBindFunc = function(event) {
@@ -152,7 +188,13 @@
 				name: $(event.currentTarget).attr("name"),
 				pic: $(event.currentTarget).attr("pic")
 			});
-			$("div#chat-boxes div#"+event.currentTarget.id+".chat-box ul.message-display").append("<li><div class='right-arrow'></div><p class='me'>"+message+"</p></li>").scrollTop($("div#chat-boxes div#"+event.currentTarget.id+".chat-box ul.message-display")[0].scrollHeight);
+			$("div#chat-boxes div#"+event.currentTarget.id+".chat-box ul.message-display").append("<li><div class='right-arrow'></div><p class='me'>"+message+"</p><div class='clear'></div></li>").scrollTop($("div#chat-boxes div#"+event.currentTarget.id+".chat-box ul.message-display")[0].scrollHeight);
+
+      $.ajax({
+        url: "/messages",
+        type: "POST",
+        data: { message: {message: message, user_id: <%= current_user.id %>, chat_id: event.currentTarget.id} }
+      })
 		}
 	}
 
@@ -178,10 +220,30 @@
         $("div#chat-boxes div#"+chatID+".chat-box input").focus();
 
   			$("div#chat-boxes div#"+chatID+".chat-box input").on("keypress", keyPressBindFunc);
+        $("div#chat-boxes div#"+chatID+".chat-box input").on("focus", function (event) {
+          $("div#"+chatID+".chat-box p").removeClass("flashing");
+        });
 
   			$("div#chat-boxes div#"+chatID+".chat-box button.delete").on("click", function (event) {
   				$("div#chat-boxes div#"+chatID+".chat-box").remove();
   			});
+
+        $.ajax({
+          url: "/messages/past",
+          type: "GET",
+          data: { chat_id: chatID },
+          success: function (res) {
+            res.forEach(function (message) {
+              if (<%= current_user.id %> === message.user_id) {
+                $("div#chat-boxes div#"+chatID+".chat-box ul.message-display").append("<li><div class='right-arrow'></div><p class='me'>"+message.message+"</p><div class='clear'></div></li>");
+              } else {
+                $("div#chat-boxes div#"+chatID+".chat-box ul.message-display").append("<li><div class='small-profile-pic' style='background-image: url("+member.info.pic+")'></div><div class='left-arrow'></div><p class='you'>"+message.message+"</p><div class='clear'></div></li>");
+              }
+            });
+
+            $("div#chat-boxes div#"+chatID+".chat-box ul.message-display").scrollTop($("div#chat-boxes div#"+chatID+".chat-box ul.message-display")[0].scrollHeight);
+          }
+        });
   		}
 		});
 	};

@@ -1,6 +1,6 @@
 module Api
-  class FriendRequestsController < ApiController
-    before_action :current_user_check
+  class FriendRequestsController < ApplicationController
+    before_action :current_user_check, except: :index
 
     def create
       @request = current_user.friend_requests_to_be_accepted.new(requested_id: params[:requested_id])
@@ -9,6 +9,10 @@ module Api
       end
 
       render json: @request
+    end
+
+    def index
+      render :index
     end
   end
 end

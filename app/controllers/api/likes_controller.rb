@@ -34,6 +34,7 @@ module Api
                                         post_id: @post.id,
                                         notifyable_id: @like.id,
                                         notifyable_type: "Like")
+              Pusher.trigger("private-notification-#{user.id}", "notification", {})
             end
           end
           render json: @like

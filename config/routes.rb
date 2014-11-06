@@ -9,9 +9,11 @@ Rails.application.routes.draw do
   resources :likes, only: [:create, :destroy]
   resources :friend, only: [:create, :destroy]
   resources :friend_requests, only: [:create, :destroy]
+  resources :messages, only: [:create]
+
+  get "/messages/past", to: "messages#past_messages"
 
   post "/pusher/auth", to: "pusher#auth"
-  post "/pusher/webhook", to: "pusher#webhook"
 
   namespace :api, defaults: { format: :json } do
     get "/users/search", to: "users#search"
@@ -21,7 +23,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:show, :create, :destroy]
     resources :likes, only: [:show, :create, :destroy]
     resources :friends, only: [:create, :destroy]
-    resources :friend_requests, only: [:create, :destroy]
+    resources :friend_requests, only: [:create, :destroy, :index]
     resources :notifications, only: [:index, :update]
   end
 end
