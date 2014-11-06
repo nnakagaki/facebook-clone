@@ -26,6 +26,8 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
     var $filePickerInput = this.$el.find("input[type=filepicker]");
     filepicker.constructWidget($filePickerInput[0]);
 
+    this.$el.find("form.upload-profile-pic button").html("");
+
 		return this;
 	},
 
@@ -43,6 +45,8 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
     "focus form#new-post": "postSubmitButtonAppear",
 		"keydown form#new-post": "pasteHandle",
 		"keyup form#new-post": "keyCacheClear",
+		"mouseeneter div.user-profile-top div.profile-pic": "profileEnter",
+		"mouseleave div.user-profile-top div.profile-pic": "profileLeave",
 	},
 
 	createPost: function (event) {
@@ -280,5 +284,13 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 		for (var i in this.keys) {
 			this.keys[i] = false;
 		}
-	}
+	},
+
+	profileEnter: function(event) {
+		$("div.user-profile-top div.profile-pic form button").addClass("darken")
+	},
+
+	profileLeave: function(event) {
+		$("div.user-profile-top div.profile-pic form button").removeClass("darken")
+	},
 })
