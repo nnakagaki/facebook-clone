@@ -1,41 +1,12 @@
-<div id="user-show">
-
-<div class="user-profile-top">
-    <div class="cover-pic" style="background-image: url(<%= user.get("cover_pic_url") %>)">
-    </div>
-
-    <div class="profile-pic" style="background-image: url(<%= user.get("profile_pic_mini_url") %>)">
-      <form class="upload-profile-pic">
-        <input
-          type="filepicker"
-          name="user[profile_pic_url]"
-          data-fp-mimetype="image/*"
-          data-fp-services="COMPUTER"
-          data-fp-button-text = ""
-          onchange="FacebookClone.currentUser.saveProfilePic(event)">
-      </form>
-    </div>
-  <h1><%= user.get("first_name") + " " + user.get("last_name") %></h1>
-</div>
-
-<% if (user.get("current_user_id")) { %>
-    <div id="friend-requests">
-      <% user.get("requests").forEach(function(request) { %>
-        <%= request.requestor_full_name %>
-        <button class="accept-friendship" id="<%= request.requestor_id %>" request-id="<%= request.request_id %>">Accept</button>
-      <% }); %>
-    </div>
-<% } %>
-
-<div class="add-friend">
-  <% if (user.get("is_friend")) { %>
-  <% } else if (user.get("requested")) { %>
-    Requested friendship
-  <% } else if (user.get("is_current_user")) { %>
-  <% } else { %>
+<% if (user.get("is_friend")) { %>
+<% } else if (user.get("requested")) { %>
+  <div class="add-friend">Requested friendship</div>
+<% } else if (user.get("is_current_user")) { %>
+<% } else { %>
+  <div class="add-friend">
     <button class="add-friend" id="<%= user.id %>">Add Friend</button>
-  <% } %>
-</div>
+  </div>
+<% } %>
 
 <div id="left-side">
   <div class="info">
@@ -168,6 +139,4 @@
 	    <% }); %>
 		<% } %>
   </ul>
-</div>
-
 </div>

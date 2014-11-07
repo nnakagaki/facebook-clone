@@ -4,7 +4,7 @@ section.nav {
   width: 100%;
   height: 45px;
   z-index: 2000;
-  background: rgb(45,255,143);
+  background: linear-gradient(rgb(45,255,143), rgb(45,185,103));
 }
 
 nav {
@@ -133,11 +133,21 @@ nav {
         background-size: cover;
       }
 
+      div div.request-num {
+        position: absolute;
+        background: red;
+        border-radius: 4px;
+        color: white;
+        padding: 0 3px 1px 3px;
+        top: 1px;
+        right: -2px;
+      }
+
       div ul {
         position: absolute;
         top: 36px;
         right: -30px;
-        width: 200px;
+        width: 260px;
         background: white;
         box-shadow: 0 0 1em grey;
         font-size: 10pt;
@@ -145,12 +155,42 @@ nav {
         li {
           background: white;
           z-index: 2500;
-          padding: 6px;
+          height: 28px;
+          border-top: 1px solid lightgrey;
 
-          a:hover {
-            background: rgb(159,255,182);
+          &:first-child {
+            height: 18px;
+            text-align: left;
+            padding: 6px;
+            border-top: 0;
+          }
+
+          a {
+            padding: 6px;
+            width: 188px;
+            border: 0;
+            margin: 0;
+            text-align: left;
+          }
+
+          button {
+            margin: 5px 6px 6px 6px;
+            float: right;
+            border-radius: 4px;
           }
         }
+      }
+
+      div div.arrow-up {
+        position: absolute;
+        top: 26px;
+        right: 1px;
+        width: 0;
+        height: 0;
+        border-bottom: 10px solid white;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        z-index: 2000;
       }
     }
   }

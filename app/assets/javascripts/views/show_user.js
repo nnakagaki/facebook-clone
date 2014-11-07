@@ -8,6 +8,8 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 
 	template: JST["show_user"],
 
+	className: "user-profile-bottom",
+
 	render: function () {
 		$("div#errors").html("")
 		var content = this.template({
@@ -23,11 +25,6 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
       that.model.fetch();
     });
 
-    var $filePickerInput = this.$el.find("input[type=filepicker]");
-    filepicker.constructWidget($filePickerInput[0]);
-
-    this.$el.find("form.upload-profile-pic button").html("");
-
 		return this;
 	},
 
@@ -41,12 +38,9 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 		"click button.delete-post": "deletePost",
 		"click button.delete-comment": "deleteComment",
 		"click button.add-friend": "friendRequest",
-		"click button.accept-friendship": "addFriendship",
     "focus form#new-post": "postSubmitButtonAppear",
 		"keydown form#new-post": "pasteHandle",
-		"keyup form#new-post": "keyCacheClear",
-		"mouseeneter div.user-profile-top div.profile-pic": "profileEnter",
-		"mouseleave div.user-profile-top div.profile-pic": "profileLeave",
+		"keyup form#new-post": "keyCacheClear"
 	},
 
 	createPost: function (event) {
@@ -220,24 +214,6 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 		});
 	},
 
-	addFriendship: function (event) {
-		var requestor_id = event.currentTarget.id;
-		var request_id = $(event.currentTarget).attr("request-id")
-		var model = new FacebookClone.Models.Friend({requestor_id: requestor_id, request_id: request_id});
-
-		var that = this;
-		model.save({}, {
-			success: function (model, res) {
-				that.model.fetch();
-			},
-			error: function (model, res) {
-				for (key in res.responseJSON) {
-					$("div#errors").html(key + " " + res.responseJSON[key])
-				}
-			}
-		});
-	},
-
   postSubmitButtonAppear: function (event) {
     this.$el.find("form#new-post input.submit").removeClass("hidden");
   },
@@ -284,13 +260,5 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 		for (var i in this.keys) {
 			this.keys[i] = false;
 		}
-	},
-
-	profileEnter: function(event) {
-		$("div.user-profile-top div.profile-pic form button").addClass("darken")
-	},
-
-	profileLeave: function(event) {
-		$("div.user-profile-top div.profile-pic form button").removeClass("darken")
-	},
+	}
 })

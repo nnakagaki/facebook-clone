@@ -1,0 +1,33 @@
+div#user-show div.user-about {
+  width: 835px;
+  float: left;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  margin: 17px 0 10px 7px;
+  background: white;
+
+  h2 {
+    background: rgb(246,247,248);
+    padding: 10px;
+    border-radius: 4px 4px 0 0;
+  }
+
+  ul.info {
+    width: 300px;
+    padding: 10px 0 10px 10px;
+
+    li {
+      border-top: 1px solid grey;
+      padding: 4px;
+
+      &:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+    }
+  }
+}

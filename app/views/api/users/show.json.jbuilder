@@ -12,7 +12,7 @@ else
 	json.cover_pic_url image_url('default_cover_image.jpg')
 end
 
-
+json.photos @user.photos
 
 if current_user
 	json.current_user_id current_user.id

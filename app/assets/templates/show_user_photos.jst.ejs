@@ -1,0 +1,11 @@
+<h2>Photos</h2>
+<ul class="photos">
+  <% var photos = user.get("photos") %>
+  <% if (photos) { %>
+    <% photos.forEach(function(photo){ %>
+      <li>
+        <div class="small-profile-pic" style="background-image: url(<%= photo.url %>)"></div>
+      </li>
+    <% }); %>
+  <% } %>
+</ul>

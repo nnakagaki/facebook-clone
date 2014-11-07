@@ -1,0 +1,11 @@
+<% count = requests.length %>
+
+<% if (count === 0) { %>
+
+<% } else if (count < 10) { %>
+  <div class="request-num single"><%= count %></div>
+<% } else if (count < 100) { %>
+  <div class="request-num double"><%= count %></div>
+<% } else { %>
+  <div class="request-num double"><%= count %></div>
+<% } %>

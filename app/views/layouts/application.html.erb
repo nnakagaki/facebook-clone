@@ -33,8 +33,7 @@
           <div class='small-profile-pic' style='background-image: url("<%= image_url('default_profile_pic.jpg') %>")'></div>
         <% end %>
 	      <a href="#/users/<%= current_user.id %>"><%= current_user.first_name %></a>
-        <button id="friend-requests">
-        </button>
+        <button id="friend-requests"></button>
 	      <button id="notifications">
           <div class="not-place"></div>
           <div class="not-button-place"></div>
@@ -127,7 +126,8 @@
 <script>
 	var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>');
 	var channel = pusher.subscribe("presence-chatRoom");
-  var notificationChannel = pusher.subscribe("private-notification-<%= current_user.id %>")
+  var notificationChannel = pusher.subscribe("private-notification-<%= current_user.id %>");
+  var friendshipChannel = pusher.subscribe("private-friendship-<%= current_user.id %>")
 
 	pusher.connection.bind("state_change", function() {
 		$("span#conn-status").text(pusher.connection.state);
@@ -274,13 +274,12 @@
 		$("ul#members li#"+member.id).remove();
 		if (myID < member.id) {
   		var chatID = myID+"-"+member.id;
-  		var chatChannel = pusher.subscribe("private-chatRoom-"+chatID);
+  		var chatChannel = pusher.unsubscribe("private-chatRoom-"+chatID);
   	} else {
   		var chatID = member.id+"-"+myID;
-			var chatChannel = pusher.subscribe("private-chatRoom-"+chatID);
+			var chatChannel = pusher.unsubscribe("private-chatRoom-"+chatID);
   	}
   	$("div#chat-boxes div#"+chatID+".chat-box").remove();
-  	pusher.channels.channels["private-chatRoom-"+chatID].unbind("client-message", clientMessageBindFunc);
 	});
 
 </script>

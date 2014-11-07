@@ -18,7 +18,14 @@ class PusherController < ApplicationController
         else
           render :text => "Forbidden", :status => '403'
         end
-      else
+      elsif channel[0..17] == "private-friendship"
+				friendship_id = channel[19..channel.length-1]
+				if friendship_id == current_user.id.to_s
+					if_auth_passed
+				else
+					render :text => "Forbidden", :status => '403'
+				end
+			else
         if_auth_passed
       end
     else

@@ -15,14 +15,29 @@ window.FacebookClone = {
     var friendRequestView = new FacebookClone.Views.FriendRequest({collection: FacebookClone.friendRequest});
     $("button#friend-requests").html(friendRequestView.render().$el);
 
-    $("button#friend-requests").on("click", function (event) {
-      $("button#friend-requests div").toggleClass("hidden");
-    })
+    var friendRequestNumView = new FacebookClone.Views.FriendRequestNum({collection: FacebookClone.friendRequest});
+    $("button#friend-requests").append(friendRequestNumView.render().$el);
 
+    $("button#friend-requests").on("click", function (event) {
+      $("button#friend-requests div.main-request").toggleClass("hidden");
+      setTimeout(function () {
+        $(window).one("click", function (event) {
+          if (event.target !== $("button#friend-requests")[0]) {
+            $("button#friend-requests div.main-request").addClass("hidden");
+          }
+        });
+      }, 100);
+    })
 
     if (typeof notificationChannel !== "undefined") {
       notificationChannel.bind("notification",function () {
         FacebookClone.notifications.fetch();
+      });
+    }
+
+    if (typeof friendshipChannel !== "undefined") {
+      friendshipChannel.bind("friendship",function () {
+        FacebookClone.friendRequest.fetch();
       });
     }
 

@@ -72,78 +72,6 @@ div.static {
   padding-top: 45px;
 }
 
-div.user-profile-top {
-  border: 1px solid lightgrey;
-  margin-left: 7px;
-  background: white;
-  border-radius: 4px;
-  height: 320px;
-  width: 835px;
-}
-
-div.user-profile-top div.profile-pic {
-  position: absolute;
-  top: 185px;
-  left: 75px;
-  height: 150px;
-  width: 150px;
-  border: 8px solid white;
-  border-radius: 10px;
-  box-shadow: 0px 0px 3pt 2pt grey;
-  background-size: cover;
-}
-
-div.user-profile-top div.cover-pic {
-  position: absolute;
-  top: 45px;
-  left: 57px;
-  height: 280px;
-  width: 837px;
-  background-size: cover;
-}
-
-div.user-profile-top h1 {
-  position: absolute;
-  top: 285px;
-  left: 258px;
-  font-size: 25px;
-}
-
-div.user-profile-top form.upload-profile-pic {
-  position: absolute;
-  bottom: 0;
-  height: 40px;
-  width: 150px;
-}
-
-div.user-profile-top div.profile-pic form.upload-profile-pic button {
-  background: transparent;
-  background-image: image-url("camera.png");
-  background-size: 30px 30px;
-  background-repeat: no-repeat;
-  background-position: 5px 5px;
-  height: 40px;
-  width: 150px;
-  opacity: 0.7;
-  padding: 0;
-
-  &:hover {
-    background: black;
-    background-image: image-url("camera.png");
-    background-size: 30px 30px;
-    background-repeat: no-repeat;
-    background-position: 5px 5px;
-  }
-
-  &.darken {
-    background: black;
-    background-image: image-url("camera.png");
-    background-size: 30px 30px;
-    background-repeat: no-repeat;
-    background-position: 5px 5px;
-  }
-}
-
 div#errors {
   width: 830px;
   margin-left: 60px;
@@ -152,6 +80,7 @@ div#errors {
 
 div#user-show {
   width: 850px;
+  height: 322px;
   margin-left: 50px;
 }
 

@@ -1,7 +1,5 @@
 module Api
   class FriendsController < ApiController
-    before_action :current_user_check
-
     def create
       @friendship = Friend.new(friend_id: current_user.id, friended_id: params[:requestor_id])
       unless @friendship.save

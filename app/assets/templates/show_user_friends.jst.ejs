@@ -1,0 +1,13 @@
+<h2>Friends</h2>
+<ul class="friends">
+  <% var friends = user.get("friends") %>
+  <% if (friends) { %>
+    <% friends.forEach(function(friend){ %>
+      <li>
+        <div class="small-profile-pic" style="background-image: url(<%= friend.pic %>)">
+          <a href="<%= '#/users/'+friend.id %>"><%= friend.full_name %></a>
+        </div>
+      </li>
+    <% }); %>
+  <% } %>
+</ul>

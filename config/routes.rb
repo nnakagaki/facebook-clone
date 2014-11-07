@@ -25,5 +25,7 @@ Rails.application.routes.draw do
     resources :friends, only: [:create, :destroy]
     resources :friend_requests, only: [:create, :destroy, :index]
     resources :notifications, only: [:index, :update]
+    resources :photos, only: [:create, :index]
+    resources :albums, only: [:create, :index]
   end
 end

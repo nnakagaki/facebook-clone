@@ -1,0 +1,36 @@
+div#user-show div.user-friends {
+  width: 835px;
+  float: left;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  margin: 17px 0 10px 7px;
+  background: white;
+
+  h2 {
+    background: rgb(246,247,248);
+    padding: 10px;
+    border-radius: 4px 4px 0 0;
+  }
+
+  ul.friends {
+    li {
+      div.small-profile-pic {
+        width: 96px;
+        height: 96px;
+        background-size: cover;
+        float: left;
+        position: relative;
+        margin: 5px;
+
+        a {
+          width: 96px;
+          padding-top: 78px;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          vertical-align: bottom;
+        }
+      }
+    }
+  }
+}

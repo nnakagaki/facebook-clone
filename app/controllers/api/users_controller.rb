@@ -9,7 +9,7 @@ module Api
     end
 
     def show
-      @user = User.find(params[:id])
+      @user = User.includes(wall_posts: [:author, :likes, :comments]).find(params[:id])
       render :show
     end
 
@@ -28,7 +28,7 @@ module Api
 
     private
     def user_params
-      params.require(:user).permit(:profile_pic_url, :profile_pic_mini_url)
+      params.require(:user).permit(:profile_pic_url, :profile_pic_mini_url, :cover_pic_url)
     end
   end
 end

@@ -1,0 +1,140 @@
+div.user-profile-top {
+  border: 1px solid lightgrey;
+  margin: 0 0 10px 7px;
+  background: white;
+  border-radius: 4px;
+  height: 320px;
+  width: 835px;
+
+  ul.display-options {
+    position: absolute;
+    bottom: 0;
+    width: 635px;
+    margin-left: 200px;
+
+    li {
+      float: left;
+      padding: 12px;
+      border-right: 1px solid lightgrey;
+      cursor: pointer;
+
+      &:first-child {
+        border-left: 1px solid lightgrey;
+      }
+    }
+  }
+
+  h1 {
+    position: absolute;
+    top: 285px;
+    left: 258px;
+    font-size: 25px;
+  }
+
+  div.cover-pic {
+    position: absolute;
+    top: 45px;
+    left: 57px;
+    height: 280px;
+    width: 837px;
+    background-size: cover;
+
+    form.upload-cover-pic {
+      position: absolute;
+      top: 0;
+      height: 40px;
+      width: 150px;
+
+      button {
+        background: transparent;
+        background-image: image-url("camera.png");
+        background-size: 30px 30px;
+        background-repeat: no-repeat;
+        background-position: 5px 5px;
+        height: 40px;
+        min-width: 40px;
+        margin: 10px;
+        border-radius: 10px;
+        opacity: 0.7;
+        padding: 0;
+        color: white;
+        -webkit-transition: background-size 0.3s, background-position 0.3s;
+        -moz-transition: background-size 0.3s, background-position 0.3s;
+        -o-transition: background-size 0.3s, background-position 0.3s;
+        transition: background-size 0.3s, background-position 0.195s;
+
+        h1 {
+          position: static;
+          font-size: 12px;
+          margin: 5px 5px 5px 45px;
+          text-align: left;
+        }
+
+        &.darken {
+          background-color: grey;
+          background-size: 20px 20px;
+          background-repeat: no-repeat;
+          background-position: 10px 10px;
+        }
+
+        &:hover {
+          background-color: black;
+        }
+      }
+    }
+  }
+
+  div.profile-pic {
+    position: absolute;
+    top: 185px;
+    left: 75px;
+    height: 150px;
+    width: 150px;
+    border: 8px solid white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3pt 2pt grey;
+    background-size: cover;
+
+    form.upload-profile-pic {
+      position: absolute;
+      bottom: 0;
+      height: 40px;
+      width: 150px;
+
+      button {
+        background: transparent;
+        background-image: image-url("camera.png");
+        background-size: 30px 30px;
+        background-repeat: no-repeat;
+        background-position: 5px 5px;
+        height: 40px;
+        width: 150px;
+        opacity: 0.7;
+        padding: 0;
+        color: white;
+        -webkit-transition: background-size 0.3s, background-position 0.3s;
+        -moz-transition: background-size 0.3s, background-position 0.3s;
+        -o-transition: background-size 0.3s, background-position 0.3s;
+        transition: background-size 0.3s, background-position 0.195s;
+
+        h1 {
+          position: static;
+          font-size: 12px;
+          margin: 5px 5px 5px 45px;
+          text-align: left;
+        }
+
+        &.darken {
+          background-color: grey;
+          background-size: 20px 20px;
+          background-repeat: no-repeat;
+          background-position: 10px 10px;
+        }
+
+        &:hover {
+          background-color: black;
+        }
+      }
+    }
+  }
+}

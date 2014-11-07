@@ -1,8 +1,9 @@
+<div class="arrow-up"></div>
 <ul>
   <li>Friend Requests</li>
   <% if (requests) { %>
     <% requests.forEach(function (request) { %>
-      <%= "<li><a href='#/users/"+request.get('requestor_id')+"'>"+request.get("full_name")+"</a></li>" %>
+      <%= "<li><a href='#/users/"+request.get('requestor_id')+"'>"+request.get("full_name")+"</a><button class='accept-friendship' id='"+request.get("requestor_id")+"' request-id='"+request.id+"'>Accept</button></li>" %>
     <% }) %>
   <% } %>
 </ul>

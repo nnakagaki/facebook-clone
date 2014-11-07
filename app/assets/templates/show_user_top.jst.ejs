@@ -1,0 +1,38 @@
+<div class="user-profile-top">
+
+<div class="cover-pic" style="background-image: url(<%= user.get("cover_pic_url") %>)">
+  <% if (user.get("is_current_user")) { %>
+    <form class="upload-cover-pic">
+      <input
+        type="filepicker"
+        name="user[profile_pic_url]"
+        data-fp-mimetype="image/*"
+        data-fp-services="COMPUTER"
+        data-fp-button-text = ""
+        onchange="FacebookClone.currentUser.saveCoverPic(event)">
+    </form>
+  <% } %>
+</div>
+
+<div class="profile-pic" style="background-image: url(<%= user.get("profile_pic_mini_url") %>)">
+  <% if (user.get("is_current_user")) { %>
+    <form class="upload-profile-pic">
+      <input
+        type="filepicker"
+        name="user[profile_pic_url]"
+        data-fp-mimetype="image/*"
+        data-fp-services="COMPUTER"
+        data-fp-button-text = ""
+        onchange="FacebookClone.currentUser.saveProfilePic(event)">
+    </form>
+  <% } %>
+</div>
+<h1><%= user.get("first_name") + " " + user.get("last_name") %></h1>
+<ul class="display-options">
+  <li>Timeline</li>
+  <li>About</li>
+  <li>Photos</li>
+  <li>Friends</li>
+</ul>
+
+</div>

@@ -14,7 +14,8 @@ FacebookClone.Routers.User = Backbone.Router.extend({
 		var user = new FacebookClone.Models.User({id: id});
 		user.fetch()
     FacebookClone.currentUser = user;
-		var userView = new FacebookClone.Views.ShowUser({
+
+		var userViewTop = new FacebookClone.Views.ShowUserTop({
 			model: user
 		});
 
@@ -31,7 +32,7 @@ FacebookClone.Routers.User = Backbone.Router.extend({
       model: user
 		});
 
-    this._swapView(userView, notView)
+    this._swapView(userViewTop, notView)
 
     $("a[href='#/users/"+user.id+"']").on("click", function(event) {
       console.log("refetch")
@@ -55,7 +56,6 @@ FacebookClone.Routers.User = Backbone.Router.extend({
 
 				setTimeout(function () {
 					$(window).one("click", function (event) {
-						console.log("in click: ",event)
 						if (event.target !== $("nav div button#notifications")[0]) {
 							$("div.notifications").addClass("hidden");
 							$("nav div button#notifications").removeClass("clicked");
@@ -66,16 +66,17 @@ FacebookClone.Routers.User = Backbone.Router.extend({
 		});
 	},
 
-  _swapView: function (userView, notView) {
-    var currentUserView, currentNotView;
-    if (currentUserView && currentNotView) {
-      currentUserView.remove();
+  _swapView: function (userViewTop, notView) {
+    var currentUserViewTop, currentNotView;
+    if (currentUserViewTop && currentNotView) {
+      currentUserViewTop.remove();
+			currentUserViewTop.subView.remove();
       currentNotView.remove();
     }
 
-    currentUserView = userView;
+		currentUserViewTop = userViewTop;
     currentNotView = notView;
-    this.$rootEl.html(userView.render().$el);
+		this.$rootEl.html(userViewTop.render().$el);
     $("nav div button#notifications div.not-place").html(notView.render().$el);
   }
 });
