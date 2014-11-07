@@ -92,3 +92,25 @@ div#user-show div.add-friend {
   background: white;
   border-radius: 4px;
 }
+
+div.shadow {
+  position: fixed;
+  background: black;
+  opacity: 0.8;
+  height: 100vh;
+  width: 100vw;
+  z-index: 4000;
+}
+
+div.picture-modal {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: black;
+  position: fixed;
+  top: 5vh;
+  left: 5vw;
+  height: 90vh;
+  width: 90vw;
+  z-index: 4001;
+}

@@ -30,8 +30,15 @@ FacebookClone.Views.ShowUserPhotos = Backbone.View.extend({
   },
 
   showPic: function (event) {
-    debugger
-    $(event.currentTarget).css("background-image");
-    
+    var picUrl = $(event.currentTarget).css("background-image");
+    $("div.picture-modal").css("background-image", picUrl).removeClass("hidden");
+    $("div.shadow").removeClass("hidden");
+    setTimeout(function() {
+      $("div.shadow").one("click", function(event) {
+        console.log(event)
+        $("div.picture-modal").addClass("hidden");
+        $("div.shadow").addClass("hidden");
+      });
+    }, 50)
   }
 })
