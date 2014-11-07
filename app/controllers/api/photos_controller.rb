@@ -21,7 +21,7 @@ module Api
 
     private
     def photo_params
-      params.require(:photo).permit(:album_id, :description, :url)
+      params.require(:photo).permit(:album_id, :url)
     end
 
     def album_params
@@ -30,10 +30,17 @@ module Api
 
     def save_photo
       @photo = current_user.photos.new(photo_params)
-      if @photo.save
-        render json: @photo
+      post = Post.new(author_id: current_user.id, userwall_id: current_user.id, latitude: params[:photo][:latitude], longitude: params[:photo][:longitude], description: params[:photo][:description])
+      if post.save
+        @photo.post_id = post.id
+        if @photo.save
+          post.update(photo_id: @photo.id)
+          render json: @photo
+        else
+          render json: @photo.errors, status: :unprocessable_entity
+        end
       else
-        render json: @photo.errors, status: :unprocessable_entity
+        render json: post.errors, status: :unprocessable_entity
       end
     end
   end

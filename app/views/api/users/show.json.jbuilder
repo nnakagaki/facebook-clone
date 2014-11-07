@@ -80,6 +80,10 @@ json.post_sort post_sort.each do |post|
 		json.embed post.embed
 	end
 
+	if post.photo_id
+		json.photo_url post.photo.url
+	end
+
 	if post.address
 		json.address post.address.split(",")[1,2]
 	end

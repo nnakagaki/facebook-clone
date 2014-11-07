@@ -1,7 +1,8 @@
 FacebookClone.Views.ShowNotifications = Backbone.View.extend({
-	initialize: function () {
-		this.listenTo(this.collection, "sync", this.render)
-    this.listenTo(this.model, "sync", this.render)
+	initialize: function (options) {
+		this.listenTo(this.collection, "sync", this.render);
+    this.listenTo(this.model, "sync", this.render);
+		this.userViewTop = options.userViewTop;
 	},
 
   className: "notifications",
@@ -52,6 +53,7 @@ FacebookClone.Views.ShowNotifications = Backbone.View.extend({
 
     var userPageLink = "users/" + event.currentTarget.id;
     if ("users/" + this.model.id === userPageLink) {
+			this.userViewTop.render()
       scrollFunc();
     } else {
       FacebookClone.userRouter.on("route", oneTimeCallback)

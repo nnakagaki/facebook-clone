@@ -8,6 +8,15 @@ FacebookClone.Models.User = Backbone.Model.extend({
 
   	this.set("profile_pic_url", blob.url);
 
+		var longitude, latitude;
+
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+				longitude = position.coords.longitude;
+				latitude = position.coords.latitude;
+			})
+		}
+
   	filepicker.convert(
 	  	blob,
 	  	{
@@ -21,7 +30,7 @@ FacebookClone.Models.User = Backbone.Model.extend({
 	    	that.save({}, {
       		success: function () {
         		that.fetch()
-						var photo = new FacebookClone.Models.Photo({ photo: { title: "Profile Pictures", url: blob.url } })
+						var photo = new FacebookClone.Models.Photo({ photo: { title: "Profile Pictures", url: blob.url, longitude: longitude, latitude: latitude, description: "Profile Picture" } })
 						photo.save({},{
 							success: function () {
 								that.fetch()
@@ -38,11 +47,20 @@ FacebookClone.Models.User = Backbone.Model.extend({
 		var blob = event.fpfile;
 		var that = this;
 
+		var longitude, latitude;
+
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+				longitude = position.coords.longitude;
+				latitude = position.coords.latitude;
+			})
+		}
+
 		this.set("cover_pic_url", blob.url);
 		this.save({}, {
 			success: function () {
 				that.fetch();
-				var photo = new FacebookClone.Models.Photo({ photo: { title: "Cover Photos", url: blob.url } })
+				var photo = new FacebookClone.Models.Photo({ photo: { title: "Cover Photos", url: blob.url, longitude: longitude, latitude: latitude, description: "Cover Photo" } })
 				photo.save({},{
 					success: function () {
 						that.fetch()

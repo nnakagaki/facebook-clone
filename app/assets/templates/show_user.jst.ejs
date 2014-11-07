@@ -76,6 +76,9 @@
           <% if (post.embed) { %>
             <%= post.embed %>
           <% } %>
+          <% if (post.photo_url) { %>
+            <img class="post-pic" src="<%= post.photo_url %>">
+          <% } %>
 
 		      <div class="options">
 	        <% if (user.get("is_friend") || user.get("is_current_user")) { %>

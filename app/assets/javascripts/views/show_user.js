@@ -40,7 +40,8 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 		"click button.add-friend": "friendRequest",
     "focus form#new-post": "postSubmitButtonAppear",
 		"keydown form#new-post": "pasteHandle",
-		"keyup form#new-post": "keyCacheClear"
+		"keyup form#new-post": "keyCacheClear",
+		"click img.post-pic": "showPic"
 	},
 
 	createPost: function (event) {
@@ -260,5 +261,38 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 		for (var i in this.keys) {
 			this.keys[i] = false;
 		}
+	},
+
+	showPic: function (event) {
+		var picUrl = $(event.currentTarget).attr("src");
+		$("img.picture-box").one("load", function (event) {
+			var maxWidth = 360 + $("img.picture-box").width();
+			if ($("img.picture-box").height() < $("img.picture-box").width()) {
+				$("img.picture-box").css("width", "100%")
+				$("img.picture-box").css("height", "auto")
+			} else {
+				$("img.picture-box").css("height", "100%")
+				$("img.picture-box").css("width", "auto")
+			}
+
+			$("div.picture-modal").css("max-width", maxWidth);
+		})
+		$("img.picture-box").attr("src", picUrl)
+
+		$("div.picture-box-box").removeClass("hidden");
+		$("div.picture-modal").removeClass("hidden");
+		$("div.shadow").removeClass("hidden");
+		$("div.picture-modal-centering-outer").removeClass("hidden");
+		$("div.picture-modal-centering-inner").removeClass("hidden");
+		setTimeout(function() {
+			$("div.shadow").one("click", function(event) {
+				console.log(event)
+				$("div.picture-modal").addClass("hidden");
+				$("div.shadow").addClass("hidden");
+				$("div.picture-box-box").addClass("hidden");
+				$("div.picture-modal-centering-outer").addClass("hidden");
+				$("div.picture-modal-centering-inner").addClass("hidden");
+			});
+		}, 50)
 	}
 })

@@ -27,4 +27,6 @@ class Post < ActiveRecord::Base
   has_many :notifications, dependent: :destroy, inverse_of: :post
 
   has_many :notices, class_name: "Notification", as: :notifyable, dependent: :destroy
+
+	belongs_to :photo
 end

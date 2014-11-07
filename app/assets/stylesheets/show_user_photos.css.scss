@@ -17,11 +17,12 @@ div#user-show div.user-photos {
   ul.photos {
 
     li {
-      div.small-profile-pic {
+      div.small-picture {
         width: 200px;
         height: 200px;
         border: 1px solid lightgrey;
         background-size: cover;
+        background-position: center;
         float: left;
         position: relative;
         margin-left: 5px;

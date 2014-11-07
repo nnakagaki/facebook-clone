@@ -8,7 +8,13 @@ FacebookClone.Views.ShowUserTop = Backbone.View.extend({
 
   id: "user-show",
 
-  render: function () {
+  render: function (viewOptionBool) {
+    console.log(viewOptionBool)
+    if (viewOptionBool !== true) {
+      console.log("here")
+      this.currentView = "Timeline"
+    }
+
     $("div#errors").html("")
     var content = this.template({
       user: this.model
@@ -98,6 +104,6 @@ FacebookClone.Views.ShowUserTop = Backbone.View.extend({
 
   switchView: function (event) {
     this.currentView = $(event.currentTarget).html();
-    this.render();
+    this.render(true);
   }
 })

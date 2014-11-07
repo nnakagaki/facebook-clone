@@ -29,7 +29,8 @@ FacebookClone.Routers.User = Backbone.Router.extend({
 
 		var notView = new FacebookClone.Views.ShowNotifications({
 		  collection: FacebookClone.notifications,
-      model: user
+      model: user,
+			userViewTop: userViewTop
 		});
 
     this._swapView(userViewTop, notView)

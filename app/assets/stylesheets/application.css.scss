@@ -99,18 +99,55 @@ div.shadow {
   opacity: 0.8;
   height: 100vh;
   width: 100vw;
-  z-index: 4000;
+  z-index: 4002;
+}
+
+div.picture-modal-centering-outer {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  background: rgba(0,0,0,0);
+  z-index: 4001;
+
+  div.picture-modal-centering-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0);
+    z-index: 4003;
+  }
 }
 
 div.picture-modal {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: black;
-  position: fixed;
-  top: 5vh;
-  left: 5vw;
-  height: 90vh;
+  background: black;
+  position: relative;
+  height: 80vh;
   width: 90vw;
-  z-index: 4001;
+  min-width: 880px;
+  min-height: 520px;
+
+  div.picture-box-box {
+    position: absolute;
+    height: 100%;
+    right: 360px;
+    left: 0;
+    overflow: hidden;
+
+    img.picture-box {
+      float: left;
+      margin: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  div.post-box {
+    width: 360px;
+    height: 100%;
+    background: white;
+    float: right;
+  }
 }

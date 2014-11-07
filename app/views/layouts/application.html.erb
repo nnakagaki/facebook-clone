@@ -16,8 +16,17 @@
 </script>
 <% if current_user %>
 <body>
-  <div class="shadow hidden"></div>
-  <div class="picture-modal hidden"></div>
+  <div class="picture-modal-centering-outer hidden">
+    <div class="shadow hidden"></div>
+    <div class="picture-modal-centering-inner hidden">
+      <div class="picture-modal hidden">
+        <div class="post-box"></div>
+        <div class="picture-box-box hidden">
+          <img class="picture-box">
+        </div>
+      </div>
+    </div>
+  </div>
 	<section class="nav">
 	  <nav>
 			<div class="logo"></div>
