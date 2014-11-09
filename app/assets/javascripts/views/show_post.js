@@ -1,5 +1,6 @@
 FacebookClone.Views.ShowPost = Backbone.View.extend({
   initialize: function (options) {
+    this.user = options.user;
     this.listenTo(this.model, "sync", this.render)
   },
 
@@ -10,17 +11,36 @@ FacebookClone.Views.ShowPost = Backbone.View.extend({
   render: function () {
     $("div#errors").html("")
     var content = this.template({
-      user: this.model
+      post: this.model,
+      user: this.user
     });
 
     this.$el.html(content);
 
     var that = this;
 
-    this.$el.find("a[href='#/users/"+this.model.id+"']").on("click", function(event) {
+    this.$el.find("a[href='#/users/"+this.user.id+"']").on("click", function(event) {
       console.log("refetch")
-      that.model.fetch();
+      that.user.fetch();
     });
+
+    $("div.picture-modal form#new-comment").off();
+
+    $("div.picture-modal form#new-comment").on("submit", function (event) {
+      event.preventDefault();
+      var values = $(event.currentTarget).serializeJSON();
+      var model = new FacebookClone.Models.Comment(values);
+      model.save({}, {
+        success: function (model, res) {
+          that.model.fetch();
+        },
+        error: function (model, res) {
+          for (key in res.responseJSON) {
+            $("div#errors").html(key + " " + res.responseJSON[key])
+          }
+        }
+      });
+    })
 
     return this;
   }

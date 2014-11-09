@@ -1,45 +1,42 @@
-<% if (post.author_id === parseInt(user.get("id"))) { %>
+<% if (post.get("author_id") === parseInt(user.get("id"))) { %>
   <% name_string = "<a href='#/users/"+user.get("id")+"'>"+user.get("first_name")+" "+user.get("last_name")+"</a>" %>
 <% } else { %>
-  <% name_string = "<a href='#/users/"+post.author_id+"'>"+post.author_full_name+"</a> > <a href='#/users/"+user.get("id")+"'>"+user.get("first_name")+" "+user.get("last_name")+"</a>" %>
+  <% name_string = "<a href='#/users/"+post.author_id+"'>"+post.get("author_full_name")+"</a> > <a href='#/users/"+user.get("id")+"'>"+user.get("first_name")+" "+user.get("last_name")+"</a>" %>
 <% } %>
 <li class="post" id="<%= post.id %>">
-  <div class="small-profile-pic" style="background-image: url(<%= post.author_pic %>)"></div>
+  <div class="small-profile-pic" style="background-image: url(<%= post.get("author_pic") %>)"></div>
   <div class="name"><%= name_string %></div>
   <% if (post.address) { %>
-    <div class="time"><%= post.time %> ago - <%= post.address %></div>
+    <div class="time"><%= post.get("time") %> ago - <%= post.get("address") %></div>
   <% } else { %>
-    <div class="time"><%= post.time %> ago</div>
+    <div class="time"><%= post.get("time") %> ago</div>
   <% } %>
-  <div class="description"><%= post.description %></div>
-  <% if (post.embed) { %>
-    <%= post.embed %>
-  <% } %>
-  <% if (post.photo_url) { %>
-    <img class="post-pic" src="<%= post.photo_url %>">
+  <div class="description"><%= post.get("description") %></div>
+  <% if (post.get("embed")) { %>
+    <%= post.get("embed") %>
   <% } %>
 
   <div class="options">
   <% if (user.get("is_friend") || user.get("is_current_user")) { %>
-    <% if (post.like_check.length !== 0) { %>
-      <button class="unlike-post" id="<%= post.like_check[0].id %>">Unlike</button>
+    <% if (post.get("like_check").length !== 0) { %>
+      <button class="unlike-post" id="<%= post.get("like_check")[0].id %>">Unlike</button>
     <% } else { %>
       <button class="like-post" id="<%= post.id %>">Like</button>
     <% } %>
-    <% if (user.get("is_current_user") || (user.get("current_user_id") === post.author_id)) { %>
+    <% if (user.get("is_current_user") || (user.get("current_user_id") === post.get("author_id"))) { %>
       <button class="delete-post" id="<%= post.id %>">Delete</button>
     <% } %>
   <% } %>
   </div>
 
   <div class="comments-wrapper">
-  <div class="likes"><%= post.likes.length %> people like this post
-  <% post.likes.forEach(function(like){ %>
+  <div class="likes"><%= post.get("likes").length %> people like this post
+  <% post.get("likes").forEach(function(like){ %>
     <a href="#/users/<%= like.user_id %>"><%= like.full_name %></a>
   <% }); %>
   </div>
   <ul>
-    <% post.comments.forEach(function(comment){ %>
+    <% post.get("comments").forEach(function(comment){ %>
       <li class="comment">
         <div class="small-profile-pic" style="background-image: url(<%= comment.author_pic %>)"></div>
         <div class="comment-container">
@@ -75,6 +72,7 @@
         </form>
       </li>
     <% } %>
+    <li class="comment"></li>
   </ul>
   </div>
 </li>

@@ -2,7 +2,7 @@ module Api
   class PostsController < ApiController
     def show
       @post = Post.find(params[:id])
-      render json: @post
+      render :show
     end
 
   	def create

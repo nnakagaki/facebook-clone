@@ -4,6 +4,7 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 		this.keys = {17: false, 86: false, 91: false, 93: false}
 		this.youtubeReg = /(https?:\/\/www\.youtu\.?be\.com\/[^\s]+)/;
 		this.youtubeReg2 = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+		this.picView = {};
 	},
 
 	template: JST["show_user"],
@@ -284,15 +285,28 @@ FacebookClone.Views.ShowUser = Backbone.View.extend({
 		$("div.shadow").removeClass("hidden");
 		$("div.picture-modal-centering-outer").removeClass("hidden");
 		$("div.picture-modal-centering-inner").removeClass("hidden");
+
+		if (typeof this.picView.remove !== "undefined") {
+			this.picView.remove();
+		}
+		var post = new FacebookClone.Models.Post({id: 1});
+		var that = this;
+		post.fetch({
+			success: function (res) {
+				that.picView = new FacebookClone.Views.ShowPost({model: post, user: that.model});
+				$("div.picture-modal div.post-box").html(that.picView.render().$el);
+			}
+		});
+
 		setTimeout(function() {
 			$("div.shadow").one("click", function(event) {
-				console.log(event)
 				$("div.picture-modal").addClass("hidden");
 				$("div.shadow").addClass("hidden");
 				$("div.picture-box-box").addClass("hidden");
 				$("div.picture-modal-centering-outer").addClass("hidden");
 				$("div.picture-modal-centering-inner").addClass("hidden");
+				that.model.fetch();
 			});
 		}, 50)
-	}
+	},
 })
