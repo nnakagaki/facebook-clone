@@ -22,5 +22,9 @@ module FacebookClone
     config.assets.paths << "#{ Rails.root }/app/assets/templates"
     config.assets.paths << "#{ Rails.root }/app/assets/audios"
     config.filepicker_rails.api_key = ENV["FILEPICKER_API_KEY"]
+
+    config.action_dispatch.default_headers = {
+      'X-Frame-Options' => 'ALLOWALL'
+    }
   end
 end
