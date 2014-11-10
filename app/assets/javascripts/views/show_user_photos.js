@@ -55,7 +55,8 @@ FacebookClone.Views.ShowUserPhotos = Backbone.View.extend({
     if (typeof this.picView.remove !== "undefined") {
       this.picView.remove();
     }
-    var post = new FacebookClone.Models.Post({id: 1});
+    console.log(event)
+    var post = new FacebookClone.Models.Post({id: $(event.currentTarget).attr("photo-id")});
     var that = this;
     post.fetch({
       success: function (res) {

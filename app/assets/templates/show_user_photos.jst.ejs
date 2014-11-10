@@ -4,7 +4,7 @@
   <% if (photos) { %>
     <% photos.forEach(function(photo){ %>
       <li>
-        <div class="small-picture" style="background-image: url(<%= photo.url %>)"></div>
+        <div class="small-picture" photo-id="<%= photo.post_id %>" style="background-image: url(<%= photo.url %>)"></div>
       </li>
     <% }); %>
   <% } %>
