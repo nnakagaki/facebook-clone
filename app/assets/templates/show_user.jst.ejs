@@ -77,7 +77,7 @@
             <%= post.embed %>
           <% } %>
           <% if (post.photo_url) { %>
-            <img class="post-pic" src="<%= post.photo_url %>">
+            <img class="post-pic" post-id="<%= post.id %>" src="<%= post.photo_url %>">
           <% } %>
 
 		      <div class="options">
