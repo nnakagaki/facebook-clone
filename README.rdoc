@@ -1,6 +1,6 @@
 = Life Long Connections web app
 
-== live at www.life-long-connections.com/
+== live at www.life-long-connections.com
 
 This app is a clone of facebook made in rails with backbone.js
 
