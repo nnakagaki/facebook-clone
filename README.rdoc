@@ -1,28 +1,21 @@
-== README
+= Life Long Connections web app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+== live at www.life-long-connections.com/
 
-Things you may want to cover:
+This app is a clone of facebook made in rails with backbone.js
 
-* Ruby version
+== To run locally
+* download zip-file or run <tt>git clone https://github.com/nnakagaki/facebook-clone.git</tt>
+* <tt>bundle install</tt>
+* <tt>bundle exec rake db:create db:migrate</tt>
+* <tt>rails server</tt>
+* go to localhost:3000 to view page
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+== Features
+* Saves profile and cover photos with FilePicker
+* Private realtime chat with Pusher
+* Realtime notifications and friend requests with Pusher
+* Find where post was posted from with the Geocoder gem
+* Allows for embedding of any website with the Link Thumbnailer gem
+* Clicking notifications auto directs and scrolls to the post of interest
+* User authentication for chat rooms and notification channels
